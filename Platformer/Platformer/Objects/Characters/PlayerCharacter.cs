@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Platformer.Objects
+namespace Platformer.Objects.Characters
 {
     abstract class PlayerCharacter : Character
     {
