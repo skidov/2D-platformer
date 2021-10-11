@@ -11,6 +11,7 @@ namespace Platformer
         private SpriteBatch _spriteBatch;
 
         private SpriteSheet testSheet;
+        private Animation testSheetAnimation;
 
         public Game1()
         {
@@ -34,6 +35,7 @@ namespace Platformer
 
             Texture2D testTexture = Content.Load<Texture2D>("Characters/Huntress/Death");
             testSheet = new SpriteSheet(testTexture, 8, 1);
+            testSheetAnimation = new Animation(testSheet, true, 0.15);
         }
 
         protected override void Update(GameTime gameTime)
@@ -50,7 +52,7 @@ namespace Platformer
             {
 
             }
-
+            testSheetAnimation.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -59,9 +61,8 @@ namespace Platformer
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            
             _spriteBatch.Begin();
-            testSheet.SpritePositionX = 7;
             testSheet.Draw(_spriteBatch, new Vector2(0, 0));
             _spriteBatch.End();
 
