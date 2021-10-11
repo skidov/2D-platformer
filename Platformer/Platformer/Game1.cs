@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Platformer.Objects;
 
 namespace Platformer
 {
@@ -8,6 +9,8 @@ namespace Platformer
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        private SpriteSheet testSheet;
 
         public Game1()
         {
@@ -28,6 +31,9 @@ namespace Platformer
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            Texture2D testTexture = Content.Load<Texture2D>("Characters/Huntress/Death");
+            testSheet = new SpriteSheet(testTexture, 8, 1);
         }
 
         protected override void Update(GameTime gameTime)
@@ -53,6 +59,11 @@ namespace Platformer
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            _spriteBatch.Begin();
+            testSheet.SpritePositionX = 7;
+            testSheet.Draw(_spriteBatch, new Vector2(0, 0));
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
