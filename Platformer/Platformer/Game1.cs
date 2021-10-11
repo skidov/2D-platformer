@@ -36,6 +36,14 @@ namespace Platformer
                 Exit();
 
             // TODO: Add your update logic here
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+
+            }
 
             base.Update(gameTime);
         }
