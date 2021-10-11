@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Platformer.Objects.Characters
 {
-    class Hunter : PlayerCharacter
+    class Huntress : PlayerCharacter
     {
     }
 }
