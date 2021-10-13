@@ -28,12 +28,14 @@ namespace Platformer.Objects
 
         public bool Repeat { get; set; }
         public double AnimationTime { get; set; }
+        public bool IsEnded { get; private set; }
 
         public Animation(SpriteSheet spriteSheet, bool repeat, double animationTime)
         {
             this.spriteSheet = spriteSheet;
             this.Repeat = repeat;
             this.AnimationTime = animationTime;
+            IsEnded = false;
         }
 
         /**
@@ -45,6 +47,7 @@ namespace Platformer.Objects
             SpritePositionX = 0;
             elapsedTime = 0;
             lastSwitch = 0;
+            IsEnded = false;
         }
 
         public void NewSpriteSheet(SpriteSheet spriteSheet)
@@ -52,11 +55,11 @@ namespace Platformer.Objects
             this.spriteSheet = spriteSheet;
             elapsedTime = 0;
             lastSwitch = 0;
+            IsEnded = false;
         }
 
         public void Update(GameTime gameTime)
         {
-
             elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
             while (lastSwitch + AnimationTime < elapsedTime)
             {
@@ -66,6 +69,8 @@ namespace Platformer.Objects
                     SpritePositionX = nextPositionX;
                 else if (Repeat)
                     SpritePositionX = 0;
+                else
+                    IsEnded = true;
             }
         }
 
