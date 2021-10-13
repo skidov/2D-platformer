@@ -31,7 +31,7 @@ namespace Platformer.Objects.Characters
             ActionIdle();
         }
 
-        public override void Update(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Update(GameTime gameTime)
         {
             animation.Update(gameTime);
         }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Platformer.Objects;
+using Platformer.Objects.Characters;
 
 namespace Platformer
 {
@@ -10,8 +11,7 @@ namespace Platformer
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private SpriteSheet testSheet;
-        private Animation testSheetAnimation;
+        Huntress huntress;
 
         public Game1()
         {
@@ -33,9 +33,8 @@ namespace Platformer
 
             // TODO: use this.Content to load your game content here
 
-            Texture2D testTexture = Content.Load<Texture2D>("Characters/Huntress/Death");
-            testSheet = new SpriteSheet(testTexture, 8, 1);
-            testSheetAnimation = new Animation(testSheet, true, 0.15);
+            Huntress.LoadContent(Content);
+            huntress = new Huntress(new Vector2(0, 0));
         }
 
         protected override void Update(GameTime gameTime)
@@ -52,7 +51,7 @@ namespace Platformer
             {
 
             }
-            testSheetAnimation.Update(gameTime);
+            huntress.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -63,7 +62,7 @@ namespace Platformer
             // TODO: Add your drawing code here
             
             _spriteBatch.Begin();
-            testSheetAnimation.Draw(_spriteBatch, new Vector2(0, 0));
+            huntress.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
