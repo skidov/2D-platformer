@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Platformer.Objects
 {
@@ -8,8 +9,23 @@ namespace Platformer.Objects
     {
         private double elapsedTime = 0;
         private double lastSwitch = 0;
+
         private SpriteSheet spriteSheet;
-        
+        private int spritePositionX = 0;
+        private int spritePositionY = 0;
+
+        public int SpritePositionX
+        {
+            get { return spritePositionX; }
+            set { if (value < spriteSheet.SpriteXCount || value < 0) spritePositionX = value; else throw new ArgumentException("Nem megfelelő érték!"); }
+        }
+
+        public int SpritePositionY
+        {
+            get { return spritePositionY; }
+            set { if (value < spriteSheet.SpriteYCount || value < 0) spritePositionY = value; else throw new ArgumentException("Nem megfelelő érték!"); }
+        }
+
         public bool Repeat { get; set; }
         public double AnimationTime { get; set; }
 
@@ -26,7 +42,7 @@ namespace Platformer.Objects
          */
         public void ResetAnimation()
         {
-            spriteSheet.SpritePositionX = 0;
+            SpritePositionX = 0;
             elapsedTime = 0;
             lastSwitch = 0;
         }
@@ -45,12 +61,17 @@ namespace Platformer.Objects
             while (lastSwitch + AnimationTime < elapsedTime)
             {
                 lastSwitch += AnimationTime;
-                int nextPositionX = spriteSheet.SpritePositionX + 1;
+                int nextPositionX = SpritePositionX + 1;
                 if (nextPositionX != spriteSheet.SpriteXCount)
-                    spriteSheet.SpritePositionX = nextPositionX;
+                    SpritePositionX = nextPositionX;
                 else if (Repeat)
-                    spriteSheet.SpritePositionX = 0;
+                    SpritePositionX = 0;
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        {
+            spriteSheet.Draw(spriteBatch, position, SpritePositionX, SpritePositionY);
         }
     }
 }

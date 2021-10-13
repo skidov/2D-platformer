@@ -63,7 +63,7 @@ namespace Platformer
             // TODO: Add your drawing code here
             
             _spriteBatch.Begin();
-            testSheet.Draw(_spriteBatch, new Vector2(0, 0));
+            testSheetAnimation.Draw(_spriteBatch, new Vector2(0, 0));
             _spriteBatch.End();
 
             base.Draw(gameTime);
