@@ -2,15 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Platformer.Objects
+namespace Platformer.Texture
 {
     class SpriteSheet
     {
         private Texture2D texture;
-        
+
         public int SpriteXCount { get; private set; }
         public int SpriteYCount { get; private set; }
-        
+
         public SpriteSheet(Texture2D texture, int spriteXCount, int spriteYCount)
         {
             this.texture = texture;

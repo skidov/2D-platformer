@@ -2,8 +2,9 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Platformer.Texture;
 
-namespace Platformer.Objects.Characters
+namespace Platformer.Character
 {
     class Huntress : PlayerCharacter
     {

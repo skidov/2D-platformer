@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace Platformer.Objects
+namespace Platformer.Texture
 {
     class Animation
     {
@@ -33,8 +33,8 @@ namespace Platformer.Objects
         public Animation(SpriteSheet spriteSheet, bool repeat, double animationTime)
         {
             this.spriteSheet = spriteSheet;
-            this.Repeat = repeat;
-            this.AnimationTime = animationTime;
+            Repeat = repeat;
+            AnimationTime = animationTime;
             IsEnded = false;
         }
 

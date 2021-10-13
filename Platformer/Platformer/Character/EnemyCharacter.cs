@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Platformer.Objects.Characters
+namespace Platformer.Character
 {
-    abstract class PlayerCharacter : Character
+    abstract class EnemyCharacter : Character
     {
     }
 }
