@@ -23,10 +23,13 @@ namespace Platformer.Character
         }
 
         Animation animation;
+        public CharacterState State { get; private set; }
+        public CharacterDirection Direction { get; set; }
 
         public Huntress(Vector2 pos)
         {
             this.Position = pos;
+            Direction = CharacterDirection.RIGHT;
 
             animation = new Animation(spriteSheetIdle, true, 0.15);
             ActionIdle();
@@ -47,6 +50,7 @@ namespace Platformer.Character
             animation.NewSpriteSheet(spriteSheetIdle);
             animation.AnimationTime = 0.15;
             animation.Repeat = true;
+            State = CharacterState.IDLE;
         }
 
         private void ActionDeath()
@@ -54,6 +58,7 @@ namespace Platformer.Character
             animation.NewSpriteSheet(spriteSheetDeath);
             animation.AnimationTime = 0.15;
             animation.Repeat = false;
+            State = CharacterState.DEATH;
         }
 
         private void ActionFall()
@@ -61,6 +66,7 @@ namespace Platformer.Character
             animation.NewSpriteSheet(spriteSheetFall);
             animation.AnimationTime = 0.15;
             animation.Repeat = false;
+            State = CharacterState.FALL;
         }
 
         private void ActionJump()
@@ -68,6 +74,7 @@ namespace Platformer.Character
             animation.NewSpriteSheet(spriteSheetJump);
             animation.AnimationTime = 0.15;
             animation.Repeat = false;
+            State = CharacterState.JUMP;
         }
 
         private void ActionRun()
@@ -75,6 +82,7 @@ namespace Platformer.Character
             animation.NewSpriteSheet(spriteSheetRun);
             animation.AnimationTime = 0.15;
             animation.Repeat = true;
+            State = CharacterState.RUN; 
         }
 
         private void ActionTakeHit()
@@ -82,6 +90,7 @@ namespace Platformer.Character
             animation.NewSpriteSheet(spriteSheetTakeHit);
             animation.AnimationTime = 0.15;
             animation.Repeat = true;
+            State = CharacterState.TAKEHIT;
         }
 
         private void ActionAttack1()
@@ -89,6 +98,7 @@ namespace Platformer.Character
             animation.NewSpriteSheet(spriteSheetAttack1);
             animation.AnimationTime = 0.15;
             animation.Repeat = false;
+            State = CharacterState.ATTACK;
         }
 
         private void ActionAttack2()
@@ -96,6 +106,7 @@ namespace Platformer.Character
             animation.NewSpriteSheet(spriteSheetAttack2);
             animation.AnimationTime = 0.15;
             animation.Repeat = false;
+            State = CharacterState.ATTACK;
         }
     }
 }
