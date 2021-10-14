@@ -11,6 +11,7 @@ namespace Platformer
         private SpriteBatch _spriteBatch;
 
         PlayerCharacterController playerController;
+        EnemyCharacterController enemyController;
 
         public Game1()
         {
@@ -35,6 +36,10 @@ namespace Platformer
             Huntress.LoadContent(Content);
             Huntress huntress = new Huntress(new Vector2(0, 0));
             playerController = new PlayerCharacterController(huntress);
+
+            Skeleton.LoadContent(Content);
+            Skeleton skeleton = new Skeleton(new Vector2(50, 250));
+            enemyController = new EnemyCharacterController(skeleton, 50, 300);
         }
 
         protected override void Update(GameTime gameTime)
@@ -45,6 +50,7 @@ namespace Platformer
             // TODO: Add your update logic here
 
             playerController.Update(gameTime);
+            enemyController.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -56,6 +62,7 @@ namespace Platformer
             
             _spriteBatch.Begin();
             playerController.Draw(gameTime, _spriteBatch);
+            enemyController.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);

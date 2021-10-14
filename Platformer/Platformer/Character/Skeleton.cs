@@ -21,16 +21,22 @@ namespace Platformer.Character
 
         public Skeleton(Vector2 pos)
         {
-            Speed = 1.0f;
+            Speed = 60.0f;
             this.Position = pos;
             Direction = CharacterDirection.RIGHT;
 
             Animation = new Animation(spriteSheetIdle, true, 0.15);
+            Animation.Effect = SpriteEffects.None;
+            Animation.Scale = 1.8f;
             ActionIdle();
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (State == CharacterState.RUN)
+            {
+                CalculateNewPosition(gameTime);
+            }
             Animation.Update(gameTime);
         }
 

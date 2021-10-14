@@ -34,5 +34,15 @@ namespace Platformer.Character
 
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+
+        internal void CalculateNewPosition(GameTime gameTime)
+        {
+            Vector2 pos = Position;
+            if (Direction == CharacterDirection.LEFT)
+                pos.X -= Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            else
+                pos.X += Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Position = pos;
+        }
     }
 }

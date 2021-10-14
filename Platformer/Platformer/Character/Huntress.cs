@@ -38,12 +38,7 @@ namespace Platformer.Character
         {
             if (State == CharacterState.RUN)
             {
-                Vector2 pos = Position;
-                if (Direction == CharacterDirection.LEFT)
-                    pos.X -= Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                else
-                    pos.X += Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                Position = pos;
+                CalculateNewPosition(gameTime);
             }
             Animation.Update(gameTime);
         }
