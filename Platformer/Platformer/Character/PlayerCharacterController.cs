@@ -23,13 +23,21 @@ namespace Platformer.Character
             switch (character.State)
             {
                 case CharacterState.IDLE:
-                    if (Keyboard.GetState().IsKeyDown(Keys.A))
+                    if (Keyboard.GetState().IsKeyDown(Keys.N))
+                        character.ActionAttack1();
+                    else if (Keyboard.GetState().IsKeyDown(Keys.M))
+                        character.ActionAttack2();
+                    else if (Keyboard.GetState().IsKeyDown(Keys.A))
                         character.ActionRun();
                     else if (Keyboard.GetState().IsKeyDown(Keys.D))
                         character.ActionRun();
                     break;
                 case CharacterState.RUN:
-                    if (!Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D))
+                    if (Keyboard.GetState().IsKeyDown(Keys.N))
+                        character.ActionAttack1();
+                    else if (Keyboard.GetState().IsKeyDown(Keys.M))
+                        character.ActionAttack2();
+                    else if (!Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D))
                         character.ActionIdle();
                     break;
             }

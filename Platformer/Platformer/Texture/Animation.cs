@@ -57,6 +57,7 @@ namespace Platformer.Texture
         public void NewSpriteSheet(SpriteSheet spriteSheet)
         {
             this.spriteSheet = spriteSheet;
+            SpritePositionX = 0;
             elapsedTime = 0;
             lastSwitch = 0;
             IsEnded = false;
@@ -69,7 +70,7 @@ namespace Platformer.Texture
             {
                 lastSwitch += AnimationTime;
                 int nextPositionX = SpritePositionX + 1;
-                if (nextPositionX != spriteSheet.SpriteXCount)
+                if (nextPositionX < spriteSheet.SpriteXCount)
                     SpritePositionX = nextPositionX;
                 else if (Repeat)
                     SpritePositionX = 0;

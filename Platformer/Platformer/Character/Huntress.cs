@@ -36,6 +36,8 @@ namespace Platformer.Character
 
         public override void Update(GameTime gameTime)
         {
+            if (State == CharacterState.ATTACK && Animation.IsEnded)
+                ActionIdle();
             if (State == CharacterState.RUN)
             {
                 CalculateNewPosition(gameTime);
