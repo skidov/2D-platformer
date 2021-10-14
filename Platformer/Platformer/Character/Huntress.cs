@@ -45,7 +45,7 @@ namespace Platformer.Character
             animation.Draw(spriteBatch, Position);
         }
 
-        private void ActionIdle()
+        internal override void ActionIdle()
         {
             animation.NewSpriteSheet(spriteSheetIdle);
             animation.AnimationTime = 0.15;
@@ -53,7 +53,7 @@ namespace Platformer.Character
             State = CharacterState.IDLE;
         }
 
-        private void ActionDeath()
+        internal override void ActionDeath()
         {
             animation.NewSpriteSheet(spriteSheetDeath);
             animation.AnimationTime = 0.15;
@@ -61,7 +61,7 @@ namespace Platformer.Character
             State = CharacterState.DEATH;
         }
 
-        private void ActionFall()
+        internal override void ActionFall()
         {
             animation.NewSpriteSheet(spriteSheetFall);
             animation.AnimationTime = 0.15;
@@ -69,7 +69,7 @@ namespace Platformer.Character
             State = CharacterState.FALL;
         }
 
-        private void ActionJump()
+        internal override void ActionJump()
         {
             animation.NewSpriteSheet(spriteSheetJump);
             animation.AnimationTime = 0.15;
@@ -77,7 +77,7 @@ namespace Platformer.Character
             State = CharacterState.JUMP;
         }
 
-        private void ActionRun()
+        internal override void ActionRun()
         {
             animation.NewSpriteSheet(spriteSheetRun);
             animation.AnimationTime = 0.15;
@@ -85,7 +85,7 @@ namespace Platformer.Character
             State = CharacterState.RUN; 
         }
 
-        private void ActionTakeHit()
+        internal override void ActionTakeHit()
         {
             animation.NewSpriteSheet(spriteSheetTakeHit);
             animation.AnimationTime = 0.15;
@@ -93,7 +93,7 @@ namespace Platformer.Character
             State = CharacterState.TAKEHIT;
         }
 
-        private void ActionAttack1()
+        internal override void ActionAttack1()
         {
             animation.NewSpriteSheet(spriteSheetAttack1);
             animation.AnimationTime = 0.15;
@@ -101,7 +101,7 @@ namespace Platformer.Character
             State = CharacterState.ATTACK;
         }
 
-        private void ActionAttack2()
+        internal override void ActionAttack2()
         {
             animation.NewSpriteSheet(spriteSheetAttack2);
             animation.AnimationTime = 0.15;

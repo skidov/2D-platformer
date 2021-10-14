@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Platformer.Character
+﻿namespace Platformer.Character
 {
     enum CharacterState
     {
