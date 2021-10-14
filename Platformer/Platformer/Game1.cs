@@ -10,7 +10,7 @@ namespace Platformer
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        Huntress huntress;
+        PlayerCharacterController playerController;
 
         public Game1()
         {
@@ -33,7 +33,8 @@ namespace Platformer
             // TODO: use this.Content to load your game content here
 
             Huntress.LoadContent(Content);
-            huntress = new Huntress(new Vector2(0, 0));
+            Huntress huntress = new Huntress(new Vector2(0, 0));
+            playerController = new PlayerCharacterController(huntress);
         }
 
         protected override void Update(GameTime gameTime)
@@ -42,15 +43,8 @@ namespace Platformer
                 Exit();
 
             // TODO: Add your update logic here
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
 
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-
-            }
-            huntress.Update(gameTime);
+            playerController.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -61,7 +55,7 @@ namespace Platformer
             // TODO: Add your drawing code here
             
             _spriteBatch.Begin();
-            huntress.Draw(gameTime, _spriteBatch);
+            playerController.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);

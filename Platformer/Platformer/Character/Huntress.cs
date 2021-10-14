@@ -23,11 +23,10 @@ namespace Platformer.Character
         }
 
         Animation animation;
-        public CharacterState State { get; private set; }
-        public CharacterDirection Direction { get; set; }
 
         public Huntress(Vector2 pos)
         {
+            Speed = 100.0f;
             this.Position = pos;
             Direction = CharacterDirection.RIGHT;
 
@@ -37,6 +36,15 @@ namespace Platformer.Character
 
         public override void Update(GameTime gameTime)
         {
+            if (State == CharacterState.RUN)
+            {
+                Vector2 pos = Position;
+                if (Direction == CharacterDirection.LEFT)
+                    pos.X -= Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                else
+                    pos.X += Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Position = pos;
+            }
             animation.Update(gameTime);
         }
 
@@ -45,7 +53,7 @@ namespace Platformer.Character
             animation.Draw(spriteBatch, Position);
         }
 
-        internal override void ActionIdle()
+        public override void ActionIdle()
         {
             animation.NewSpriteSheet(spriteSheetIdle);
             animation.AnimationTime = 0.15;
@@ -53,7 +61,7 @@ namespace Platformer.Character
             State = CharacterState.IDLE;
         }
 
-        internal override void ActionDeath()
+        public override void ActionDeath()
         {
             animation.NewSpriteSheet(spriteSheetDeath);
             animation.AnimationTime = 0.15;
@@ -61,7 +69,7 @@ namespace Platformer.Character
             State = CharacterState.DEATH;
         }
 
-        internal override void ActionFall()
+        public override void ActionFall()
         {
             animation.NewSpriteSheet(spriteSheetFall);
             animation.AnimationTime = 0.15;
@@ -69,7 +77,7 @@ namespace Platformer.Character
             State = CharacterState.FALL;
         }
 
-        internal override void ActionJump()
+        public override void ActionJump()
         {
             animation.NewSpriteSheet(spriteSheetJump);
             animation.AnimationTime = 0.15;
@@ -77,7 +85,7 @@ namespace Platformer.Character
             State = CharacterState.JUMP;
         }
 
-        internal override void ActionRun()
+        public override void ActionRun()
         {
             animation.NewSpriteSheet(spriteSheetRun);
             animation.AnimationTime = 0.15;
@@ -85,7 +93,7 @@ namespace Platformer.Character
             State = CharacterState.RUN; 
         }
 
-        internal override void ActionTakeHit()
+        public override void ActionTakeHit()
         {
             animation.NewSpriteSheet(spriteSheetTakeHit);
             animation.AnimationTime = 0.15;
@@ -93,7 +101,7 @@ namespace Platformer.Character
             State = CharacterState.TAKEHIT;
         }
 
-        internal override void ActionAttack1()
+        public override void ActionAttack1()
         {
             animation.NewSpriteSheet(spriteSheetAttack1);
             animation.AnimationTime = 0.15;
@@ -101,7 +109,7 @@ namespace Platformer.Character
             State = CharacterState.ATTACK;
         }
 
-        internal override void ActionAttack2()
+        public override void ActionAttack2()
         {
             animation.NewSpriteSheet(spriteSheetAttack2);
             animation.AnimationTime = 0.15;

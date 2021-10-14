@@ -23,6 +23,7 @@ namespace Platformer.Character
 
         public Skeleton(Vector2 pos)
         {
+            Speed = 1.0f;
             this.Position = pos;
             Direction = CharacterDirection.RIGHT;
 
@@ -40,7 +41,7 @@ namespace Platformer.Character
             animation.Draw(spriteBatch, Position);
         }
 
-        internal override void ActionIdle()
+        public override void ActionIdle()
         {
             animation.NewSpriteSheet(spriteSheetIdle);
             animation.AnimationTime = 0.15;
@@ -48,7 +49,7 @@ namespace Platformer.Character
             State = CharacterState.IDLE;
         }
 
-        internal override void ActionDeath()
+        public override void ActionDeath()
         {
             animation.NewSpriteSheet(spriteSheetDeath);
             animation.AnimationTime = 0.15;
@@ -56,7 +57,7 @@ namespace Platformer.Character
             State = CharacterState.DEATH;
         }
 
-        internal override void ActionRun()
+        public override void ActionRun()
         {
             animation.NewSpriteSheet(spriteSheetRun);
             animation.AnimationTime = 0.15;
@@ -64,7 +65,7 @@ namespace Platformer.Character
             State = CharacterState.RUN;
         }
 
-        internal override void ActionTakeHit()
+        public override void ActionTakeHit()
         {
             animation.NewSpriteSheet(spriteSheetTakeHit);
             animation.AnimationTime = 0.15;
@@ -72,7 +73,7 @@ namespace Platformer.Character
             State = CharacterState.TAKEHIT;
         }
 
-        internal override void ActionAttack()
+        public override void ActionAttack()
         {
             animation.NewSpriteSheet(spriteSheetAttack);
             animation.AnimationTime = 0.15;

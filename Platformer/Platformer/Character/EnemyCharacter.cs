@@ -6,18 +6,14 @@ namespace Platformer.Character
 {
     abstract class EnemyCharacter : Character
     {
-        abstract public override void Update(GameTime gameTime);
+        abstract public void ActionIdle();
 
-        abstract public override void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        abstract public void ActionDeath();
 
-        abstract internal void ActionIdle();
+        abstract public void ActionRun();
 
-        abstract internal void ActionDeath();
+        abstract public void ActionTakeHit();
 
-        abstract internal void ActionRun();
-
-        abstract internal void ActionTakeHit();
-
-        abstract internal void ActionAttack();
+        abstract public void ActionAttack();
     }
 }
