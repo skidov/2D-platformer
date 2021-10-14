@@ -19,65 +19,63 @@ namespace Platformer.Character
             spriteSheetAttack = new SpriteSheet(content.Load<Texture2D>("Characters/Skeleton/Skeleton Attack"), 18, 1);
         }
 
-        Animation animation;
-
         public Skeleton(Vector2 pos)
         {
             Speed = 1.0f;
             this.Position = pos;
             Direction = CharacterDirection.RIGHT;
 
-            animation = new Animation(spriteSheetIdle, true, 0.15);
+            Animation = new Animation(spriteSheetIdle, true, 0.15);
             ActionIdle();
         }
 
         public override void Update(GameTime gameTime)
         {
-            animation.Update(gameTime);
+            Animation.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            animation.Draw(spriteBatch, Position);
+            Animation.Draw(spriteBatch, Position);
         }
 
         public override void ActionIdle()
         {
-            animation.NewSpriteSheet(spriteSheetIdle);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = true;
+            Animation.NewSpriteSheet(spriteSheetIdle);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = true;
             State = CharacterState.IDLE;
         }
 
         public override void ActionDeath()
         {
-            animation.NewSpriteSheet(spriteSheetDeath);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = false;
+            Animation.NewSpriteSheet(spriteSheetDeath);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = false;
             State = CharacterState.DEATH;
         }
 
         public override void ActionRun()
         {
-            animation.NewSpriteSheet(spriteSheetRun);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = true;
+            Animation.NewSpriteSheet(spriteSheetRun);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = true;
             State = CharacterState.RUN;
         }
 
         public override void ActionTakeHit()
         {
-            animation.NewSpriteSheet(spriteSheetTakeHit);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = true;
+            Animation.NewSpriteSheet(spriteSheetTakeHit);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = true;
             State = CharacterState.TAKEHIT;
         }
 
         public override void ActionAttack()
         {
-            animation.NewSpriteSheet(spriteSheetAttack);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = false;
+            Animation.NewSpriteSheet(spriteSheetAttack);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = false;
             State = CharacterState.ATTACK;
         }
     }

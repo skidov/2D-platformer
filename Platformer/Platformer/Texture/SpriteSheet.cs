@@ -18,12 +18,12 @@ namespace Platformer.Texture
             this.SpriteYCount = spriteYCount;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, int posX, int posY)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, int posX, int posY, float scale, SpriteEffects effect)
         {
             int spriteWidth = texture.Width / SpriteXCount;
             int spriteHeight = texture.Height / SpriteYCount;
             Rectangle sourceRectangle = new Rectangle(spriteWidth * posX, spriteHeight * posY, spriteWidth, spriteHeight);
-            spriteBatch.Draw(texture, position, sourceRectangle, Color.White);
+            spriteBatch.Draw(texture, position, sourceRectangle, Color.White, 0, new Vector2(0, 0), scale, effect, 1.0f);
         }
     }
 }

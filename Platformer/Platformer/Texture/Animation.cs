@@ -29,6 +29,8 @@ namespace Platformer.Texture
         public bool Repeat { get; set; }
         public double AnimationTime { get; set; }
         public bool IsEnded { get; private set; }
+        public SpriteEffects Effect { get; set; }
+        public float Scale { get; set; }
 
         public Animation(SpriteSheet spriteSheet, bool repeat, double animationTime)
         {
@@ -36,6 +38,8 @@ namespace Platformer.Texture
             Repeat = repeat;
             AnimationTime = animationTime;
             IsEnded = false;
+            Effect = SpriteEffects.None;
+            Scale = 1.0f;
         }
 
         /**
@@ -76,7 +80,7 @@ namespace Platformer.Texture
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteSheet.Draw(spriteBatch, position, SpritePositionX, SpritePositionY);
+            spriteSheet.Draw(spriteBatch, position, SpritePositionX, SpritePositionY, Scale, Effect);
         }
     }
 }

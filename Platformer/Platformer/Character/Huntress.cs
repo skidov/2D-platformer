@@ -22,15 +22,15 @@ namespace Platformer.Character
             spriteSheetAttack2 = new SpriteSheet(content.Load<Texture2D>("Characters/Huntress/Attack2"), 5, 1);
         }
 
-        Animation animation;
-
         public Huntress(Vector2 pos)
         {
             Speed = 100.0f;
             this.Position = pos;
             Direction = CharacterDirection.RIGHT;
 
-            animation = new Animation(spriteSheetIdle, true, 0.15);
+            Animation = new Animation(spriteSheetIdle, true, 0.15);
+            Animation.Effect = SpriteEffects.None;
+            Animation.Scale = 1.3f;
             ActionIdle();
         }
 
@@ -45,75 +45,75 @@ namespace Platformer.Character
                     pos.X += Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 Position = pos;
             }
-            animation.Update(gameTime);
+            Animation.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            animation.Draw(spriteBatch, Position);
+            Animation.Draw(spriteBatch, Position);
         }
 
         public override void ActionIdle()
         {
-            animation.NewSpriteSheet(spriteSheetIdle);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = true;
+            Animation.NewSpriteSheet(spriteSheetIdle);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = true;
             State = CharacterState.IDLE;
         }
 
         public override void ActionDeath()
         {
-            animation.NewSpriteSheet(spriteSheetDeath);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = false;
+            Animation.NewSpriteSheet(spriteSheetDeath);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = false;
             State = CharacterState.DEATH;
         }
 
         public override void ActionFall()
         {
-            animation.NewSpriteSheet(spriteSheetFall);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = false;
+            Animation.NewSpriteSheet(spriteSheetFall);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = false;
             State = CharacterState.FALL;
         }
 
         public override void ActionJump()
         {
-            animation.NewSpriteSheet(spriteSheetJump);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = false;
+            Animation.NewSpriteSheet(spriteSheetJump);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = false;
             State = CharacterState.JUMP;
         }
 
         public override void ActionRun()
         {
-            animation.NewSpriteSheet(spriteSheetRun);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = true;
+            Animation.NewSpriteSheet(spriteSheetRun);
+            Animation.AnimationTime = 0.12;
+            Animation.Repeat = true;
             State = CharacterState.RUN; 
         }
 
         public override void ActionTakeHit()
         {
-            animation.NewSpriteSheet(spriteSheetTakeHit);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = true;
+            Animation.NewSpriteSheet(spriteSheetTakeHit);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = true;
             State = CharacterState.TAKEHIT;
         }
 
         public override void ActionAttack1()
         {
-            animation.NewSpriteSheet(spriteSheetAttack1);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = false;
+            Animation.NewSpriteSheet(spriteSheetAttack1);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = false;
             State = CharacterState.ATTACK;
         }
 
         public override void ActionAttack2()
         {
-            animation.NewSpriteSheet(spriteSheetAttack2);
-            animation.AnimationTime = 0.15;
-            animation.Repeat = false;
+            Animation.NewSpriteSheet(spriteSheetAttack2);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = false;
             State = CharacterState.ATTACK;
         }
     }
