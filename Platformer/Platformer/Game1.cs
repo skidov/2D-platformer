@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Platformer.Camera;
 using Platformer.Character;
 
 namespace Platformer
@@ -10,8 +11,13 @@ namespace Platformer
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        public static int ScreenWidth { get; private set; }
+        public static int ScreenHeight { get; private set; }
+
         PlayerCharacterController playerController;
         EnemyCharacterController enemyController;
+        GameCamera camera;
+        PlayerCharacter huntress;
 
         public Game1()
         {
@@ -23,6 +29,10 @@ namespace Platformer
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            ScreenWidth = _graphics.PreferredBackBufferWidth;
+            ScreenHeight = _graphics.PreferredBackBufferHeight;
+
+            camera = new GameCamera();
 
             base.Initialize();
         }
@@ -34,7 +44,7 @@ namespace Platformer
             // TODO: use this.Content to load your game content here
 
             Huntress.LoadContent(Content);
-            Huntress huntress = new Huntress(new Vector2(0, 0));
+            huntress = new Huntress(new Vector2(0, 0));
             playerController = new PlayerCharacterController(huntress);
 
             Skeleton.LoadContent(Content);
@@ -51,6 +61,8 @@ namespace Platformer
 
             playerController.Update(gameTime);
             enemyController.Update(gameTime);
+
+            camera.Follow(huntress.Position);
             base.Update(gameTime);
         }
 
@@ -60,7 +72,7 @@ namespace Platformer
 
             // TODO: Add your drawing code here
             
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(transformMatrix: camera.Transform);
             playerController.Draw(gameTime, _spriteBatch);
             enemyController.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();
