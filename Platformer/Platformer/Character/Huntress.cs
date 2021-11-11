@@ -13,6 +13,9 @@ namespace Platformer.Character
         private const int COLLISION_BOX_OFF_SET_Y = 102;
         private const int COLLISION_BOX_HALF_SIZE_X = 11;
         private const int COLLISION_BOX_HALF_SIZE_Y = 23;
+        private const float WALK_SPEED = 100.0f;
+        private const float JUMP_SPEED = 100.0f;
+
         private static SpriteSheet spriteSheetIdle, spriteSheetDeath, spriteSheetFall, spriteSheetJump, spriteSheetRun, spriteSheetTakeHit, spriteSheetAttack1, spriteSheetAttack2;
 
         public static void LoadContent(ContentManager content)
@@ -33,8 +36,6 @@ namespace Platformer.Character
             CharacterCollisionBoxOffSet = new Vector2(COLLISION_BOX_OFF_SET_X, COLLISION_BOX_OFF_SET_Y);
             CharacterCollisionBox = new CollisionBox(Position + CharacterCollisionBoxOffSet, new Vector2(COLLISION_BOX_HALF_SIZE_X, COLLISION_BOX_HALF_SIZE_Y));
             
-            WalkSpeed = 100.0f;
-            JumpSpeed = 50.0f;
             Direction = CharacterDirection.RIGHT;
 
             Animation = new Animation(spriteSheetIdle, true, 0.15);
@@ -54,13 +55,21 @@ namespace Platformer.Character
                 case CharacterState.DEATH:
                     break;
                 case CharacterState.FALL:
+                    if (MoveWhileFall)
+                        SetUpRunSeed(WALK_SPEED);
+                    AddGravity(gameTime);
                     break;
                 case CharacterState.IDLE:
                     break;
                 case CharacterState.JUMP:
+                    if (MoveWhileFall)
+                        SetUpRunSeed(WALK_SPEED);
+                    AddGravity(gameTime);
+                    if (Speed.Y > 0)
+                        ActionFall();
                     break;
-                case CharacterState.RUN:
-                    SetUpRunSeed();
+                case CharacterState.RUN:              
+                    SetUpRunSeed(WALK_SPEED);
                     break;
                 case CharacterState.TAKEHIT:
                     break;
@@ -104,7 +113,7 @@ namespace Platformer.Character
         public override void ActionJump()
         {
             Vector2 speed = Speed;
-            speed.Y = JumpSpeed;
+            speed.Y = -JUMP_SPEED;
             Speed = speed;
 
             Animation.NewSpriteSheet(spriteSheetJump);

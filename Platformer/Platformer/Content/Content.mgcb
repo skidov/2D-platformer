@@ -10,6 +10,9 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\MonoGame.Extended.Content.Pipeline.dll
+/reference:..\..\MonoGame.Extended.dll
+/reference:..\..\MonoGame.Extended.Tiled.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -216,4 +219,50 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Characters/Skeleton/Skeleton Walk.png
+
+#begin Map/basicmap/Assets.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:Map/basicmap/Assets.tsx
+
+#begin Map/basicmap/basicmap.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Map/basicmap/basicmap.tmx
+
+#begin Map/basicmap/tiles/Assets.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/basicmap/tiles/Assets.png
+
+#begin Map/basicmap/tiles/Background_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/basicmap/tiles/Background_1.png
+
+#begin Map/basicmap/tiles/Background_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/basicmap/tiles/Background_2.png
 

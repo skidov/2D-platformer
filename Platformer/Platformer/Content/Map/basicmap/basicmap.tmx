@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="Assets.tsx"/>
+ <layer id="1" name="Platform" width="30" height="20" offsetx="0.00473485" offsety="0.0293561">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4B2QBCIhQbAHi0g1kZTw4eE0YEjEDthEXcgYC/MHpYBwrIDhM0GCI/6d9S/o/4d9e9Q8S8ANoE8sg==
+  </data>
+ </layer>
+</map>

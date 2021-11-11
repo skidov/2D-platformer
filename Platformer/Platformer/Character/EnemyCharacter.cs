@@ -6,8 +6,6 @@ namespace Platformer.Character
 {
     public abstract class EnemyCharacter : Character
     {
-        abstract public void ActionIdle();
-
         abstract public void ActionDeath();
 
         abstract public void ActionRun();

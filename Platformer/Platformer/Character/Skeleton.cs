@@ -13,6 +13,8 @@ namespace Platformer.Character
         private const int COLLISION_BOX_OFF_SET_Y = 36;
         private const int COLLISION_BOX_HALF_SIZE_X = 8;
         private const int COLLISION_BOX_HALF_SIZE_Y = 22;
+        private const float WALK_SPEED = 60.0f;
+
         private static SpriteSheet spriteSheetIdle, spriteSheetDeath, spriteSheetRun, spriteSheetTakeHit, spriteSheetAttack;
 
         public static void LoadContent(ContentManager content)
@@ -30,7 +32,6 @@ namespace Platformer.Character
             CharacterCollisionBoxOffSet = new Vector2(COLLISION_BOX_OFF_SET_X, COLLISION_BOX_OFF_SET_Y);
             CharacterCollisionBox = new CollisionBox(Position + CharacterCollisionBoxOffSet, new Vector2(COLLISION_BOX_HALF_SIZE_X, COLLISION_BOX_HALF_SIZE_Y));
 
-            WalkSpeed = 60.0f;
             Direction = CharacterDirection.RIGHT;
 
             Animation = new Animation(spriteSheetIdle, true, 0.15);
@@ -54,7 +55,7 @@ namespace Platformer.Character
                 case CharacterState.JUMP:
                     break;
                 case CharacterState.RUN:
-                    SetUpRunSeed();    
+                    SetUpRunSeed(WALK_SPEED);    
                     break;
                 case CharacterState.TAKEHIT:
                     break;             

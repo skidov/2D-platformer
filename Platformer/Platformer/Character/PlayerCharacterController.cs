@@ -27,18 +27,26 @@ namespace Platformer.Character
                         character.ActionAttack1();
                     else if (Keyboard.GetState().IsKeyDown(Keys.M))
                         character.ActionAttack2();
-                    else if (Keyboard.GetState().IsKeyDown(Keys.A))
+                    else if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
                         character.ActionRun();
-                    else if (Keyboard.GetState().IsKeyDown(Keys.D))
-                        character.ActionRun();
-                    break;
+                    else if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                        character.ActionJump();
+                     break;
                 case CharacterState.RUN:
                     if (Keyboard.GetState().IsKeyDown(Keys.N))
                         character.ActionAttack1();
                     else if (Keyboard.GetState().IsKeyDown(Keys.M))
                         character.ActionAttack2();
+                    else if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                        character.ActionJump();
                     else if (!Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D))
                         character.ActionIdle();
+                    break;
+                case CharacterState.JUMP:
+                    if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
+                        character.MoveWhileFall = true;
+                    else
+                        character.MoveWhileFall = false;
                     break;
             }
             character.Update(gameTime);
