@@ -2,12 +2,17 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Platformer.Physics;
 using Platformer.Texture;
 
 namespace Platformer.Character
 {
-    class Skeleton : EnemyCharacter
+    public class Skeleton : EnemyCharacter
     {
+        private const int COLLISION_BOX_OFF_SET_X = 20;
+        private const int COLLISION_BOX_OFF_SET_Y = 36;
+        private const int COLLISION_BOX_HALF_SIZE_X = 8;
+        private const int COLLISION_BOX_HALF_SIZE_Y = 22;
         private static SpriteSheet spriteSheetIdle, spriteSheetDeath, spriteSheetRun, spriteSheetTakeHit, spriteSheetAttack;
 
         public static void LoadContent(ContentManager content)
@@ -21,8 +26,11 @@ namespace Platformer.Character
 
         public Skeleton(Vector2 pos)
         {
-            Speed = 60.0f;
             this.Position = pos;
+            CharacterCollisionBoxOffSet = new Vector2(COLLISION_BOX_OFF_SET_X, COLLISION_BOX_OFF_SET_Y);
+            CharacterCollisionBox = new CollisionBox(Position + CharacterCollisionBoxOffSet, new Vector2(COLLISION_BOX_HALF_SIZE_X, COLLISION_BOX_HALF_SIZE_Y));
+
+            WalkSpeed = 60.0f;
             Direction = CharacterDirection.RIGHT;
 
             Animation = new Animation(spriteSheetIdle, true, 0.15);
@@ -33,10 +41,26 @@ namespace Platformer.Character
 
         public override void Update(GameTime gameTime)
         {
-            if (State == CharacterState.RUN)
+            switch (State)
             {
-                CalculateNewPosition(gameTime);
+                case CharacterState.ATTACK:
+                    break;
+                case CharacterState.DEATH:
+                    break;
+                case CharacterState.FALL:
+                    break;
+                case CharacterState.IDLE:
+                    break;
+                case CharacterState.JUMP:
+                    break;
+                case CharacterState.RUN:
+                    SetUpRunSeed();    
+                    break;
+                case CharacterState.TAKEHIT:
+                    break;             
             }
+
+            UpdatePhysics(gameTime);
             Animation.Update(gameTime);
         }
 
@@ -47,6 +71,8 @@ namespace Platformer.Character
 
         public override void ActionIdle()
         {
+            Speed = Vector2.Zero;
+
             Animation.NewSpriteSheet(spriteSheetIdle);
             Animation.AnimationTime = 0.15;
             Animation.Repeat = true;

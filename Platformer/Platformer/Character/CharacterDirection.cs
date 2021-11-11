@@ -1,6 +1,6 @@
 ﻿namespace Platformer.Character
 {
-    enum CharacterDirection
+    public enum CharacterDirection
     {
         LEFT,
         RIGHT

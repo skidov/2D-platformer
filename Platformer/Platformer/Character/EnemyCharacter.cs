@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Platformer.Character
 {
-    abstract class EnemyCharacter : Character
+    public abstract class EnemyCharacter : Character
     {
         abstract public void ActionIdle();
 

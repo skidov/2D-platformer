@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Platformer.Character
 {
-    class EnemyCharacterController
+    public class EnemyCharacterController
     {
         EnemyCharacter character;
         float minXPos;

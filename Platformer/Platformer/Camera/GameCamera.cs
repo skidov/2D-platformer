@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Diagnostics;
 
 namespace Platformer.Camera
 {
@@ -15,13 +14,9 @@ namespace Platformer.Camera
                 Game1.ScreenWidth / 2,
                 Game1.ScreenHeight / 2,
                 0);
-
-            Debug.WriteLine(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2);
-            Debug.WriteLine(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2);
-
             Transform = Matrix.CreateTranslation(
-                -target.X - 150,
-                -target.Y - 150,
+                -target.X,
+                -target.Y,
                 0) * gameScreen;
         }
     }

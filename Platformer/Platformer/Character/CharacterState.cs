@@ -1,6 +1,6 @@
 ﻿namespace Platformer.Character
 {
-    enum CharacterState
+    public enum CharacterState
     {
         IDLE,
         RUN,
