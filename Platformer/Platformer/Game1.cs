@@ -52,7 +52,7 @@ namespace Platformer
             playerController = new PlayerCharacterController(huntress);
 
             Skeleton.LoadContent(Content);
-            skeleton = new Skeleton(new Vector2(50, 250));
+            skeleton = new Skeleton(new Vector2(50, 0));
             enemyController = new EnemyCharacterController(skeleton, 50, 300);
 
             basicMap = new BasicMap();
@@ -93,6 +93,9 @@ namespace Platformer
 
             DrawCharacterCollisionbox(_spriteBatch, huntress);
             DrawCharacterCollisionbox(_spriteBatch, skeleton);
+
+            _spriteBatch.Draw(_pointTexture, new Rectangle(-1000, -1, 2000, 1), Color.Black);
+
 
             _spriteBatch.End();
 

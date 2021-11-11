@@ -67,13 +67,14 @@ namespace Platformer.Character
         {
             Position += Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Vector2 pos = Position;
-            if (pos.Y > 0.0f)
+            float posY = CharacterCollisionBox.Center.Y + CharacterCollisionBox.HalfSize.Y;
+            if (posY > 0.0f)
             {
-                pos.Y = 0.0f;
+                Vector2 pos = Position;
+                pos.Y -= posY;
+                Position = pos;
                 ActionIdle();
             }
-            Position = pos;
 
             CharacterCollisionBox.Center = Position + CharacterCollisionBoxOffSet;
         }
