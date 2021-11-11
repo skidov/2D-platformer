@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Platformer.Camera;
 using Platformer.Character;
+using Platformer.Map;
 
 namespace Platformer
 {
@@ -20,6 +21,7 @@ namespace Platformer
         PlayerCharacter huntress;
         EnemyCharacter skeleton;
         Texture2D _pointTexture;
+        BasicMap basicMap;
 
         public Game1()
         {
@@ -52,6 +54,9 @@ namespace Platformer
             Skeleton.LoadContent(Content);
             skeleton = new Skeleton(new Vector2(50, 250));
             enemyController = new EnemyCharacterController(skeleton, 50, 300);
+
+            basicMap = new BasicMap();
+            basicMap.LoadContent(Content, GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)
@@ -60,6 +65,8 @@ namespace Platformer
                 Exit();
 
             // TODO: Add your update logic here
+
+            basicMap.Update(gameTime);
 
             playerController.Update(gameTime);
             enemyController.Update(gameTime);
@@ -73,7 +80,14 @@ namespace Platformer
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+            basicMap.DrawBackground(_spriteBatch);
+            _spriteBatch.End();
+
             _spriteBatch.Begin(transformMatrix: camera.Transform);
+
+            //basicMap.DrawMap(gameTime);
+
             playerController.Draw(gameTime, _spriteBatch);
             enemyController.Draw(gameTime, _spriteBatch);
 
