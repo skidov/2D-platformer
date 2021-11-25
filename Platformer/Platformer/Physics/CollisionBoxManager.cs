@@ -68,7 +68,9 @@ namespace Platformer.Physics
             foreach (var e in enemyCharactersBoxes)
                 DrawCollisionBox(spriteBatch, e, Color.Red);
             foreach (var e in gameEndBoxes)
-                DrawCollisionBox(spriteBatch, e, Color.DarkBlue);
+                DrawCollisionBox(spriteBatch, e, Color.Blue);
+            foreach (var e in mapBoxes)
+                DrawCollisionBox(spriteBatch, e, Color.Purple);
 
             spriteBatch.Draw(_pointTexture, new Rectangle(-1000, -1, 2000, 1), Color.Black);
         }
