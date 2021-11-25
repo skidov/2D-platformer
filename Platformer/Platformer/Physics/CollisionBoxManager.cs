@@ -11,11 +11,14 @@ namespace Platformer.Physics
         private static List<CollisionBox> playerCharactersBoxes = new List<CollisionBox>();
         private static List<CollisionBox> enemyCharactersBoxes = new List<CollisionBox>();
         private static List<CollisionBox> gameEndBoxes = new List<CollisionBox>();
+        private static List<CollisionBox> mapBoxes = new List<CollisionBox>();
 
         public static void Reset()
         {
             playerCharactersBoxes.Clear();
             enemyCharactersBoxes.Clear();
+            gameEndBoxes.Clear();
+            mapBoxes.Clear();
         }
 
         public static void AddPlayerCollisionBox(CollisionBox collisionBox)
@@ -27,9 +30,15 @@ namespace Platformer.Physics
         {
             enemyCharactersBoxes.Add(collisionBox);
         }
+
         public static void AddGameEndCollisionBox(CollisionBox collisionBox)
         {
             gameEndBoxes.Add(collisionBox);
+        }
+
+        public static void AddMapCollisionBox(CollisionBox collisionBox)
+        {
+            mapBoxes.Add(collisionBox);
         }
 
         public static void RemovePlayerCollisionBox(CollisionBox collisionBox)
@@ -45,6 +54,11 @@ namespace Platformer.Physics
         public static void RemoveGameEndCollisionBox(CollisionBox collisionBox)
         {
             gameEndBoxes.Remove(collisionBox);
+        }
+
+        public static void RemoveMapCollisionBox(CollisionBox collisionBox)
+        {
+            mapBoxes.Remove(collisionBox);
         }
 
         public static void Draw(SpriteBatch spriteBatch)
