@@ -5,48 +5,44 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using Platformer.Camera;
+using Platformer.Physics;
 
 namespace Platformer.Map
 {
-    public class BasicMap
+    public class BasicMap : Map
     {
-        private TiledMap _tiledMap;
-        private TiledMapRenderer _tiledMapRenderer;
+        private const float SCALE = 1.8f;
+        
         private Texture2D background1;
         private Texture2D background2;
 
-        public void LoadContent(ContentManager content, GraphicsDevice graphicsDevice)
+        public override void LoadContent(ContentManager content, GraphicsDevice graphicsDevice)
         {
             background1 = content.Load<Texture2D>("Map/basicmap/tiles/Background_1");
             background2 = content.Load<Texture2D>("Map/basicmap/tiles/Background_2");
             _tiledMap = content.Load<TiledMap>("Map/basicmap/basicmap");
             _tiledMapRenderer = new TiledMapRenderer(graphicsDevice, _tiledMap);
-           
+
+            LoadObjects(SCALE);
         }
 
-        public void Update(GameTime gameTime)
-        {
-            _tiledMapRenderer.Update(gameTime);
-        }
-
-        public void DrawBackground(SpriteBatch _spritebatch)
+        public override void DrawBackground(SpriteBatch _spritebatch)
         {
             _spritebatch.Draw(background2, new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
             _spritebatch.Draw(background1, new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
         }
 
-        public void DrawMap(GameTime gameTime, GameCamera camera)
+        public override void DrawMap(GameTime gameTime, GameCamera camera)
         {
             foreach (TiledMapLayer layer in _tiledMap.Layers)
             {
-                Matrix scaleMatrix = Matrix.CreateScale(1.8f);
+                Matrix scaleMatrix = Matrix.CreateScale(SCALE);
                 if (layer.Name == "Map")
                 {
                     
                     _tiledMapRenderer.Draw(layer, viewMatrix: scaleMatrix * Matrix.CreateTranslation(-200, -400, 0) * camera.Transform);
                 }
             }
-
         }
     }
 }

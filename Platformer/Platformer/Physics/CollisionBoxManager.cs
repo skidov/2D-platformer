@@ -8,41 +8,53 @@ namespace Platformer.Physics
     class CollisionBoxManager
     {
         private static Texture2D _pointTexture;
-        private static List<CollisionBox> playerCharacters = new List<CollisionBox>();
-        private static List<CollisionBox> enemyCharacters = new List<CollisionBox>();
+        private static List<CollisionBox> playerCharactersBoxes = new List<CollisionBox>();
+        private static List<CollisionBox> enemyCharactersBoxes = new List<CollisionBox>();
+        private static List<CollisionBox> gameEndBoxes = new List<CollisionBox>();
 
         public static void Reset()
         {
-            playerCharacters.Clear();
-            enemyCharacters.Clear();
+            playerCharactersBoxes.Clear();
+            enemyCharactersBoxes.Clear();
         }
 
         public static void AddPlayerCollisionBox(CollisionBox collisionBox)
         {
-            playerCharacters.Add(collisionBox);
+            playerCharactersBoxes.Add(collisionBox);
         }
 
         public static void AddEnemyCollisionBox(CollisionBox collisionBox)
         {
-            enemyCharacters.Add(collisionBox);
+            enemyCharactersBoxes.Add(collisionBox);
+        }
+        public static void AddGameEndCollisionBox(CollisionBox collisionBox)
+        {
+            gameEndBoxes.Add(collisionBox);
         }
 
         public static void RemovePlayerCollisionBox(CollisionBox collisionBox)
         {
-            playerCharacters.Remove(collisionBox);
+            playerCharactersBoxes.Remove(collisionBox);
         }
 
         public static void RemoveEnemyCollisionBox(CollisionBox collisionBox)
         {
-            enemyCharacters.Remove(collisionBox);
+            enemyCharactersBoxes.Remove(collisionBox);
+        }
+
+        public static void RemoveGameEndCollisionBox(CollisionBox collisionBox)
+        {
+            gameEndBoxes.Remove(collisionBox);
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            foreach (var e in playerCharacters)
+            foreach (var e in playerCharactersBoxes)
                 DrawCollisionBox(spriteBatch, e, Color.Red);
-            foreach (var e in enemyCharacters)
+            foreach (var e in enemyCharactersBoxes)
                 DrawCollisionBox(spriteBatch, e, Color.Red);
+            foreach (var e in gameEndBoxes)
+                DrawCollisionBox(spriteBatch, e, Color.DarkBlue);
 
             spriteBatch.Draw(_pointTexture, new Rectangle(-1000, -1, 2000, 1), Color.Black);
         }
