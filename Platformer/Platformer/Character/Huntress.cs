@@ -30,11 +30,12 @@ namespace Platformer.Character
             spriteSheetAttack2 = new SpriteSheet(content.Load<Texture2D>("Characters/Huntress/Attack2"), 5, 1);
         }
 
-        public Huntress(Vector2 pos)
+        public Huntress(Vector2 pos) : base()
         {
             this.Position = pos;
             CharacterCollisionBoxOffSet = new Vector2(COLLISION_BOX_OFF_SET_X, COLLISION_BOX_OFF_SET_Y);
             CharacterCollisionBox = new CollisionBox(Position + CharacterCollisionBoxOffSet, new Vector2(COLLISION_BOX_HALF_SIZE_X, COLLISION_BOX_HALF_SIZE_Y));
+            CollisionBoxManager.AddPlayerCollisionBox(CharacterCollisionBox);
             
             Direction = CharacterDirection.RIGHT;
 

@@ -31,6 +31,7 @@ namespace Platformer.Character
             this.Position = pos;
             CharacterCollisionBoxOffSet = new Vector2(COLLISION_BOX_OFF_SET_X, COLLISION_BOX_OFF_SET_Y);
             CharacterCollisionBox = new CollisionBox(Position + CharacterCollisionBoxOffSet, new Vector2(COLLISION_BOX_HALF_SIZE_X, COLLISION_BOX_HALF_SIZE_Y));
+            CollisionBoxManager.AddEnemyCollisionBox(CharacterCollisionBox);
 
             Direction = CharacterDirection.RIGHT;
 

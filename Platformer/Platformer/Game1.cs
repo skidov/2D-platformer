@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Platformer.Camera;
 using Platformer.Character;
 using Platformer.Map;
+using Platformer.Physics;
 
 namespace Platformer
 {
@@ -20,7 +21,6 @@ namespace Platformer
         GameCamera camera;
         PlayerCharacter huntress;
         EnemyCharacter skeleton;
-        Texture2D _pointTexture;
         BasicMap basicMap;
 
         public Game1()
@@ -91,39 +91,12 @@ namespace Platformer
             playerController.Draw(gameTime, _spriteBatch);
             enemyController.Draw(gameTime, _spriteBatch);
 
-            DrawCharacterCollisionbox(_spriteBatch, huntress);
-            DrawCharacterCollisionbox(_spriteBatch, skeleton);
-
-            _spriteBatch.Draw(_pointTexture, new Rectangle(-1000, -1, 2000, 1), Color.Black);
+            CollisionBoxManager.Draw(_spriteBatch);
 
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        public void DrawCharacterCollisionbox(SpriteBatch _spriteBatch, Character.Character character)
-        {
-            DrawRectangle(_spriteBatch, new Rectangle(
-                (int)(character.CharacterCollisionBox.Center.X - character.CharacterCollisionBox.HalfSize.X),
-                (int)(character.CharacterCollisionBox.Center.Y - character.CharacterCollisionBox.HalfSize.Y),
-                (int)character.CharacterCollisionBox.HalfSize.X * 2,
-                (int)character.CharacterCollisionBox.HalfSize.Y * 2),
-                Color.Red, 1);
-        }
-
-        public void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color, int lineWidth)
-        {
-            if (_pointTexture == null)
-            {
-                _pointTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-                _pointTexture.SetData<Color>(new Color[] { Color.White });
-            }
-
-            spriteBatch.Draw(_pointTexture, new Rectangle(rectangle.X, rectangle.Y, lineWidth, rectangle.Height + lineWidth), color);
-            spriteBatch.Draw(_pointTexture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width + lineWidth, lineWidth), color);
-            spriteBatch.Draw(_pointTexture, new Rectangle(rectangle.X + rectangle.Width, rectangle.Y, lineWidth, rectangle.Height + lineWidth), color);
-            spriteBatch.Draw(_pointTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + lineWidth, lineWidth), color);
         }
     }
 }
