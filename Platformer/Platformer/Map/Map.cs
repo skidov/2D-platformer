@@ -7,6 +7,7 @@ using MonoGame.Extended.Tiled.Renderers;
 using Platformer.Camera;
 using Platformer.Character;
 using Platformer.Physics;
+using System.Collections.Generic;
 
 namespace Platformer.Map
 {
@@ -16,7 +17,7 @@ namespace Platformer.Map
         internal TiledMapRenderer _tiledMapRenderer;
         internal PlayerCharacterController playerController;
         internal PlayerCharacter player;
-        internal EnemyCharacterController enemyController;
+        internal List<EnemyCharacterController> enemyControllers;
         internal GameCamera camera;
 
         public abstract void LoadContent(ContentManager content, GraphicsDevice graphicsDevice);
@@ -26,6 +27,7 @@ namespace Platformer.Map
         public Map()
         {
             camera = new GameCamera();
+            enemyControllers = new List<EnemyCharacterController>();
         }
 
         internal void LoadObjects(float scale)
@@ -58,7 +60,14 @@ namespace Platformer.Map
                 }
                 else if (e.Name == "PatrolEnemy")
                 {
-
+                    foreach (var o in e.Objects)
+                    {
+                        if (o.Name == "Skeleton")
+                        {
+                            EnemyCharacter enemy = new Skeleton(o.Position * scale);
+                            enemyControllers.Add(new EnemyCharacterController(enemy, o.Position.X * scale, o.Position.X * scale + o.Size.Width * scale));
+                        }
+                    }
                 }
             }
         }
@@ -72,6 +81,11 @@ namespace Platformer.Map
         {
             playerController.Update(gameTime);
             camera.Follow(player.CharacterCollisionBox.Center);
+
+            foreach (var e in enemyControllers)
+            {
+                e.Update(gameTime);
+            }
 
             _tiledMapRenderer.Update(gameTime);
         }
@@ -87,6 +101,11 @@ namespace Platformer.Map
             spriteBatch.Begin(transformMatrix: camera.Transform);
 
             playerController.Draw(gameTime, spriteBatch);
+
+            foreach (var e in enemyControllers)
+            {
+                e.Draw(gameTime, spriteBatch);
+            }
 
             CollisionBoxManager.Draw(spriteBatch);
 
