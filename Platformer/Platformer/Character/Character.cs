@@ -18,10 +18,23 @@ namespace Platformer.Character
 
         public CollisionBox CharacterCollisionBox { get; set; }
         internal Vector2 CharacterCollisionBoxOffSet { get; set; }
-        public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
         public Vector2 Mass { get; set; }
         public bool MoveWhileFall { get; set; }
+
+        private Vector2 position;
+        public Vector2 Position 
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+                CharacterCollisionBox.Center = value + CharacterCollisionBoxOffSet;
+            }
+        }
 
         public CharacterDirection Direction 
         {
@@ -75,8 +88,6 @@ namespace Platformer.Character
                 Position = pos;
                 ActionIdle();
             }
-
-            CharacterCollisionBox.Center = Position + CharacterCollisionBoxOffSet;
         }
 
         abstract public void ActionIdle();

@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using Platformer.Camera;
+using Platformer.Character;
 using Platformer.Physics;
 
 namespace Platformer.Map
@@ -13,10 +14,19 @@ namespace Platformer.Map
     {
         internal TiledMap _tiledMap;
         internal TiledMapRenderer _tiledMapRenderer;
+        internal PlayerCharacterController playerController;
+        internal PlayerCharacter player;
+        internal EnemyCharacterController enemyController;
+        internal GameCamera camera;
 
         public abstract void LoadContent(ContentManager content, GraphicsDevice graphicsDevice);
         public abstract void DrawBackground(SpriteBatch _spritebatch);
         public abstract void DrawMap(GameTime gameTime, GameCamera camera);
+
+        public Map()
+        {
+            camera = new GameCamera();
+        }
 
         internal void LoadObjects(float scale)
         {
@@ -34,11 +44,8 @@ namespace Platformer.Map
                         }
                         else if (o.Name == "StartPoint")
                         {
-
-                        }
-                        else if (o.Name == "PatrolEnemy")
-                        {
-
+                            player = new Huntress(o.Position);
+                            playerController = new PlayerCharacterController(player);
                         }
                     }
                 }
@@ -48,6 +55,10 @@ namespace Platformer.Map
                     {
                         CollisionBoxManager.AddMapCollisionBox(GenerateCollisionBox(o, scale));
                     }
+                }
+                else if (e.Name == "PatrolEnemy")
+                {
+
                 }
             }
         }
@@ -59,7 +70,29 @@ namespace Platformer.Map
 
         public void Update(GameTime gameTime)
         {
+            playerController.Update(gameTime);
+            camera.Follow(player.CharacterCollisionBox.Center);
+
             _tiledMapRenderer.Update(gameTime);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            spriteBatch.Begin();
+            DrawBackground(spriteBatch);
+            spriteBatch.End();
+
+            DrawMap(gameTime, camera);
+
+            spriteBatch.Begin(transformMatrix: camera.Transform);
+
+            playerController.Draw(gameTime, spriteBatch);
+
+            CollisionBoxManager.Draw(spriteBatch);
+
+
+            spriteBatch.End();
+
         }
     }
 }

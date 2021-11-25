@@ -32,9 +32,10 @@ namespace Platformer.Character
 
         public Huntress(Vector2 pos) : base()
         {
-            this.Position = pos;
             CharacterCollisionBoxOffSet = new Vector2(COLLISION_BOX_OFF_SET_X, COLLISION_BOX_OFF_SET_Y);
-            CharacterCollisionBox = new CollisionBox(Position + CharacterCollisionBoxOffSet, new Vector2(COLLISION_BOX_HALF_SIZE_X, COLLISION_BOX_HALF_SIZE_Y));
+            CharacterCollisionBox = new CollisionBox(new Vector2(0, 0), new Vector2(COLLISION_BOX_HALF_SIZE_X, COLLISION_BOX_HALF_SIZE_Y));
+            this.Position = pos;
+
             CollisionBoxManager.AddPlayerCollisionBox(CharacterCollisionBox);
             
             Direction = CharacterDirection.RIGHT;

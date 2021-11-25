@@ -16,11 +16,6 @@ namespace Platformer
         public static int ScreenWidth { get; private set; }
         public static int ScreenHeight { get; private set; }
 
-        PlayerCharacterController playerController;
-        EnemyCharacterController enemyController;
-        GameCamera camera;
-        PlayerCharacter huntress;
-        EnemyCharacter skeleton;
         BasicMap basicMap;
 
         public Game1()
@@ -36,8 +31,6 @@ namespace Platformer
             ScreenWidth = _graphics.PreferredBackBufferWidth;
             ScreenHeight = _graphics.PreferredBackBufferHeight;
 
-            camera = new GameCamera();
-
             base.Initialize();
         }
 
@@ -48,12 +41,12 @@ namespace Platformer
             // TODO: use this.Content to load your game content here
 
             Huntress.LoadContent(Content);
-            huntress = new Huntress(new Vector2(0, 0));
-            playerController = new PlayerCharacterController(huntress);
+            
 
             Skeleton.LoadContent(Content);
+            /*
             skeleton = new Skeleton(new Vector2(50, 0));
-            enemyController = new EnemyCharacterController(skeleton, 50, 300);
+            enemyController = new EnemyCharacterController(skeleton, 50, 300);*/
 
             basicMap = new BasicMap();
             basicMap.LoadContent(Content, GraphicsDevice);
@@ -68,10 +61,10 @@ namespace Platformer
 
             basicMap.Update(gameTime);
 
-            playerController.Update(gameTime);
-            enemyController.Update(gameTime);
+            
+            //enemyController.Update(gameTime);
 
-            camera.Follow(huntress.CharacterCollisionBox.Center);
+            
             base.Update(gameTime);
         }
 
@@ -80,21 +73,8 @@ namespace Platformer
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
-            basicMap.DrawBackground(_spriteBatch);
-            _spriteBatch.End();
 
-            basicMap.DrawMap(gameTime, camera);
-
-            _spriteBatch.Begin(transformMatrix: camera.Transform);
-
-            playerController.Draw(gameTime, _spriteBatch);
-            enemyController.Draw(gameTime, _spriteBatch);
-
-            CollisionBoxManager.Draw(_spriteBatch);
-
-
-            _spriteBatch.End();
+            basicMap.Draw(_spriteBatch, gameTime);
 
             base.Draw(gameTime);
         }
