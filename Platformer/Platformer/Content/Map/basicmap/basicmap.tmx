@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="29">
+ <editorsettings>
+  <export target="basicmap.lua" format="lua"/>
+ </editorsettings>
  <tileset firstgid="1" source="Assets.tsx"/>
- <layer id="1" name="Platform" width="30" height="20" offsetx="0.00473485" offsety="0.0293561">
+ <layer id="1" name="Map" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4B2QBCIhQbAHi0g1kZTw4eE0YEjEDthEXcgYC/MHpYBwrIDhM0GCI/6d9S/o/4d9e9Q8S8ANoE8sg==
+   eJztlUsKwkAQRLNwLejW3163ItnqHfygnsHPKQTvZ46hV7A2gbFD1DSd1OhMwWNCft3VFSZpErZSdgNkRf9hK/oPW9F/2Ir+w1b0H7b+zf8NZBXu1/rfgp1gr3yXpe7g8eb6EqzAGmySov8O6NbT2lfS1s9zl6vUARzBCZyTov8xmIhzbQepOVgo+i17Xls/z12uUhfn+AqGoGXE6LPdF/UMa2sZGFJ1L5ka19cwM8T1n++JUm7mfeP6GprO34fMm8jflW+ZN52/b5nXlX/Zv8S3zCP1fP+/CHv+bNjzZ8OePxv2/Nmw58+GPX827PmzeQLuXLQV
   </data>
  </layer>
+ <objectgroup id="5" name="Collision"/>
 </map>

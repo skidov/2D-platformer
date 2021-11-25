@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
+using Platformer.Camera;
 
 namespace Platformer.Map
 {
@@ -20,7 +21,7 @@ namespace Platformer.Map
             background2 = content.Load<Texture2D>("Map/basicmap/tiles/Background_2");
             _tiledMap = content.Load<TiledMap>("Map/basicmap/basicmap");
             _tiledMapRenderer = new TiledMapRenderer(graphicsDevice, _tiledMap);
-
+           
         }
 
         public void Update(GameTime gameTime)
@@ -34,9 +35,18 @@ namespace Platformer.Map
             _spritebatch.Draw(background1, new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
         }
 
-        public void DrawMap(GameTime gameTime)
+        public void DrawMap(GameTime gameTime, GameCamera camera)
         {
-            _tiledMapRenderer.Draw();
+            foreach (TiledMapLayer layer in _tiledMap.Layers)
+            {
+                Matrix scaleMatrix = Matrix.CreateScale(1.8f);
+                if (layer.Name == "Map")
+                {
+                    
+                    _tiledMapRenderer.Draw(layer, viewMatrix: scaleMatrix * Matrix.CreateTranslation(-200, -400, 0) * camera.Transform);
+                }
+            }
+
         }
     }
 }

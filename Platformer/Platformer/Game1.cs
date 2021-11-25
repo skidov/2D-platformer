@@ -84,9 +84,9 @@ namespace Platformer
             basicMap.DrawBackground(_spriteBatch);
             _spriteBatch.End();
 
-            _spriteBatch.Begin(transformMatrix: camera.Transform);
+            basicMap.DrawMap(gameTime, camera);
 
-            //basicMap.DrawMap(gameTime);
+            _spriteBatch.Begin(transformMatrix: camera.Transform);
 
             playerController.Draw(gameTime, _spriteBatch);
             enemyController.Draw(gameTime, _spriteBatch);

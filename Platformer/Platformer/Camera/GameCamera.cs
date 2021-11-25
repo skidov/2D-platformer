@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Platformer.Camera
 {
-    class GameCamera
+    public class GameCamera
     {
         public Matrix Transform { get; private set; }
 
