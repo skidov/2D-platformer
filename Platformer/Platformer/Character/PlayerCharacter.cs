@@ -8,8 +8,6 @@ namespace Platformer.Character
     {
         abstract public void ActionDeath();
 
-        abstract public void ActionFall();
-
         abstract public void ActionJump();
 
         abstract public void ActionRun();

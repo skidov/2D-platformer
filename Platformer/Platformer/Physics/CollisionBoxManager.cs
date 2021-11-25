@@ -61,6 +61,16 @@ namespace Platformer.Physics
             mapBoxes.Remove(collisionBox);
         }
 
+        public static bool IntersectWithMap(CollisionBox collisionBox)
+        {
+            foreach (var e in mapBoxes)
+            {
+                if (collisionBox.IsCollided(e))
+                    return true;
+            }
+            return false;
+        }
+
         public static void Draw(SpriteBatch spriteBatch)
         {
             foreach (var e in playerCharactersBoxes)

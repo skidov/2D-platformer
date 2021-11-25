@@ -80,16 +80,14 @@ namespace Platformer.Character
         {
             Position += Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            float posY = CharacterCollisionBox.Center.Y + CharacterCollisionBox.HalfSize.Y;
-            if (posY > 0.0f)
-            {
-                Vector2 pos = Position;
-                pos.Y -= posY;
-                Position = pos;
+            if (State != CharacterState.JUMP && State != CharacterState.FALL && !CollisionBoxManager.IntersectWithMap(CharacterCollisionBox))
+                ActionFall();
+            else if ((State == CharacterState.FALL || State == CharacterState.JUMP) && CollisionBoxManager.IntersectWithMap(CharacterCollisionBox))
                 ActionIdle();
-            }
         }
 
         abstract public void ActionIdle();
+
+        abstract public void ActionFall();
     }
 }

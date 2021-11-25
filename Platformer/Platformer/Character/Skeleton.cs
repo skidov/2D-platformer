@@ -113,5 +113,13 @@ namespace Platformer.Character
             Animation.Repeat = false;
             State = CharacterState.ATTACK;
         }
+
+        public override void ActionFall()
+        {
+            Animation.NewSpriteSheet(spriteSheetIdle);
+            Animation.AnimationTime = 0.15;
+            Animation.Repeat = true;
+            State = CharacterState.FALL;
+        }
     }
 }
