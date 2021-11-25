@@ -42,6 +42,13 @@ namespace Platformer.Map
                         }
                     }
                 }
+                else if (e.Name == "Collisions")
+                {
+                    foreach (var o in e.Objects)
+                    {
+                        CollisionBoxManager.AddMapCollisionBox(GenerateCollisionBox(o, scale));
+                    }
+                }
             }
         }
 
