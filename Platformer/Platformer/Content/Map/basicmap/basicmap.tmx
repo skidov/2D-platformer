@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="32">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="44">
  <editorsettings>
   <export target="basicmap.lua" format="lua"/>
  </editorsettings>
@@ -14,5 +14,16 @@
   <object id="30" name="EndPoint" x="968" y="208" width="48" height="48"/>
   <object id="31" name="PatrolEnemy" x="560" y="256" width="160"/>
  </objectgroup>
- <objectgroup id="5" name="Collision"/>
+ <objectgroup id="5" name="Collisions">
+  <object id="33" x="0" y="0" width="16" height="256"/>
+  <object id="34" x="0" y="256" width="320" height="256"/>
+  <object id="35" x="320" y="352" width="80" height="160"/>
+  <object id="36" x="400" y="320" width="48" height="192"/>
+  <object id="37" x="448" y="288" width="48" height="224"/>
+  <object id="38" x="496" y="256" width="528" height="256"/>
+  <object id="39" x="800" y="224" width="96" height="32"/>
+  <object id="40" x="832" y="192" width="32" height="32"/>
+  <object id="41" x="352" y="293" width="32" height="6"/>
+  <object id="43" x="224" y="213" width="96" height="6"/>
+ </objectgroup>
 </map>
