@@ -40,7 +40,7 @@ namespace Platformer.Map
                 if (layer.Name == "Map")
                 {
                     
-                    _tiledMapRenderer.Draw(layer, viewMatrix: scaleMatrix * Matrix.CreateTranslation(-200, -400, 0) * camera.Transform);
+                    _tiledMapRenderer.Draw(layer, viewMatrix: scaleMatrix * camera.Transform);
                 }
             }
         }

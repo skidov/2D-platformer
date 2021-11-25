@@ -44,7 +44,7 @@ namespace Platformer.Map
                         }
                         else if (o.Name == "StartPoint")
                         {
-                            player = new Huntress(o.Position);
+                            player = new Huntress(o.Position * scale);
                             playerController = new PlayerCharacterController(player);
                         }
                     }
@@ -65,7 +65,7 @@ namespace Platformer.Map
 
         internal CollisionBox GenerateCollisionBox(TiledMapObject to, float scale)
         {
-            return new CollisionBox((to.Position + (Vector2)to.Size / 2) * scale - new Vector2(200, 400), to.Size * scale / 2);
+            return new CollisionBox((to.Position + (Vector2)to.Size / 2) * scale, to.Size * scale / 2);
         }
 
         public void Update(GameTime gameTime)

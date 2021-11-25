@@ -71,8 +71,6 @@ namespace Platformer.Physics
                 DrawCollisionBox(spriteBatch, e, Color.Blue);
             foreach (var e in mapBoxes)
                 DrawCollisionBox(spriteBatch, e, Color.Purple);
-
-            spriteBatch.Draw(_pointTexture, new Rectangle(-1000, -1, 2000, 1), Color.Black);
         }
 
         public static void DrawCollisionBox(SpriteBatch spriteBatch, CollisionBox collisionBox, Color color)
