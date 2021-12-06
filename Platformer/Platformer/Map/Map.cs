@@ -6,7 +6,7 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using Platformer.Camera;
 using Platformer.Character;
-using Platformer.Physics;
+using Platformer.Collision;
 using System.Collections.Generic;
 
 namespace Platformer.Map

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Platformer.Camera;
 using Platformer.Character;
 using Platformer.Map;
-using Platformer.Physics;
+using Platformer.Collision;
 
 namespace Platformer
 {

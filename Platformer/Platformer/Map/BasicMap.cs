@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using Platformer.Camera;
-using Platformer.Physics;
+using Platformer.Collision;
 
 namespace Platformer.Map
 {
