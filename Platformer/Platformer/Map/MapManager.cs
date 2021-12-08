@@ -14,18 +14,18 @@ namespace Platformer.Map
 {
     public class MapManager
     {
-        internal Map map;
+        internal GameMap map;
         internal PlayerCharacterController playerController;
         internal PlayerCharacter player;
         internal List<EnemyCharacterController> enemyControllers;
         internal OrthographicCamera _camera;
 
-        public MapManager(Map map, GraphicsDevice graphicsDevice, GameWindow window)
+        public MapManager(GameMap map, GraphicsDevice graphicsDevice, GameWindow window)
         {
             enemyControllers = new List<EnemyCharacterController>();
             this.map = map;
 
-            var viewportAdapter = new BoxingViewportAdapter(window, graphicsDevice, 960, 720);
+            var viewportAdapter = new BoxingViewportAdapter(window, graphicsDevice, 960, 540);
             _camera = new OrthographicCamera(viewportAdapter);
 
             LoadObjects();

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Platformer.Map
 {
-    public class BasicMap : Map
+    public class BasicMap : GameMap
     {
         private const float SCALE = 1.8f;
 

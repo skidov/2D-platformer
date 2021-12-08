@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Platformer.Map;
+using Platformer.Scenes;
 
 namespace Platformer
 {
@@ -13,8 +14,8 @@ namespace Platformer
         public static int ScreenWidth { get; private set; }
         public static int ScreenHeight { get; private set; }
 
+        Scene actualScene;
         MapManager mapManager;
-        BasicMap basicMap;
 
         public Game1()
         {
@@ -32,10 +33,6 @@ namespace Platformer
             // TODO: Add your initialization logic here
             ScreenWidth = _graphics.PreferredBackBufferWidth;
             ScreenHeight = _graphics.PreferredBackBufferHeight;
-            System.Diagnostics.Debug.WriteLine("" + GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width);
-            System.Diagnostics.Debug.WriteLine("" + GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
-            System.Diagnostics.Debug.WriteLine("" + _graphics.PreferredBackBufferWidth);
-            System.Diagnostics.Debug.WriteLine("" + _graphics.PreferredBackBufferHeight);
 
             base.Initialize();
         }
@@ -46,10 +43,8 @@ namespace Platformer
 
             // TODO: use this.Content to load your game content here
 
-
-
-            basicMap = new BasicMap(Content, GraphicsDevice);
-            mapManager = new MapManager(basicMap, GraphicsDevice, Window);
+            SetUpMapmanager(new BasicMap(Content, GraphicsDevice));
+            ChangeScene(GameState.GAME);
         }
 
         protected override void Update(GameTime gameTime)
@@ -59,11 +54,7 @@ namespace Platformer
 
             // TODO: Add your update logic here
 
-            mapManager.Update(gameTime);
-
-            
-            //enemyController.Update(gameTime);
-
+            actualScene.Update(gameTime);
             
             base.Update(gameTime);
         }
@@ -74,9 +65,22 @@ namespace Platformer
 
             // TODO: Add your drawing code here
 
-            mapManager.Draw(_spriteBatch, gameTime);
+            actualScene.Draw(_spriteBatch, gameTime);
 
             base.Draw(gameTime);
+        }
+
+        public void SetUpMapmanager(GameMap map)
+        {
+            mapManager = new MapManager(map, GraphicsDevice, Window);
+        }
+
+        public void ChangeScene(GameState scene)
+        {
+            if (scene == GameState.GAME)
+            {
+                actualScene = new GameScene(mapManager);
+            }
         }
     }
 }

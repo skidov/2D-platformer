@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Platformer.Map
 {
-    public abstract class Map
+    public abstract class GameMap
     {
         public float Scale { get; internal set; }
         public TiledMap _TiledMap { get; internal set; }
