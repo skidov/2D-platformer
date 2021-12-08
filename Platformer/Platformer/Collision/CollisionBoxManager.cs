@@ -61,14 +61,16 @@ namespace Platformer.Collision
             mapBoxes.Remove(collisionBox);
         }
 
-        public static bool IntersectWithMap(CollisionBox collisionBox)
+        public static List<CollisionBox> IntersectWithMap(CollisionBox collisionBox)
         {
+            List<CollisionBox> collidedBoxes = new List<CollisionBox>();
+
             foreach (var e in mapBoxes)
             {
                 if (collisionBox.IsCollided(e))
-                    return true;
+                    collidedBoxes.Add(e);
             }
-            return false;
+            return collidedBoxes;
         }
 
         public static void Draw(SpriteBatch spriteBatch)

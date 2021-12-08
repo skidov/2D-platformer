@@ -48,6 +48,12 @@ namespace Platformer.Character
                     else
                         character.MoveWhileFall = false;
                     break;
+                case CharacterState.FALL:
+                    if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
+                        character.MoveWhileFall = true;
+                    else
+                        character.MoveWhileFall = false;
+                    break;
             }
             character.Update(gameTime);
         }

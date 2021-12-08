@@ -14,7 +14,7 @@ namespace Platformer.Character
         private const int COLLISION_BOX_HALF_SIZE_X = 11;
         private const int COLLISION_BOX_HALF_SIZE_Y = 23;
         private const float WALK_SPEED = 100.0f;
-        private const float JUMP_SPEED = 100.0f;
+        private const float JUMP_SPEED = 130.0f;
 
         private static SpriteSheet spriteSheetIdle, spriteSheetDeath, spriteSheetFall, spriteSheetJump, spriteSheetRun, spriteSheetTakeHit, spriteSheetAttack1, spriteSheetAttack2;
 
@@ -59,14 +59,12 @@ namespace Platformer.Character
                 case CharacterState.FALL:
                     if (MoveWhileFall)
                         SetUpRunSeed(WALK_SPEED);
-                    AddGravity(gameTime);
                     break;
                 case CharacterState.IDLE:
                     break;
                 case CharacterState.JUMP:
                     if (MoveWhileFall)
                         SetUpRunSeed(WALK_SPEED);
-                    AddGravity(gameTime);
                     if (Speed.Y > 0)
                         ActionFall();
                     break;

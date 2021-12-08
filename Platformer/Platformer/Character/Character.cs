@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Platformer.Collision;
 using Platformer.Texture;
 using System;
+using System.Collections.Generic;
 
 namespace Platformer.Character
 {
@@ -78,12 +79,63 @@ namespace Platformer.Character
 
         public void UpdatePhysics(GameTime gameTime)
         {
-            Position += Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            AddGravity(gameTime);
+            Vector2 addPos = Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+
+            List<CollisionBox> collidedBoxes;
+
+            if (addPos.X != 0)
+            {
+                Position += new Vector2(addPos.X, 0);
+                collidedBoxes = CollisionBoxManager.IntersectWithMap(
+                    new CollisionBox(CharacterCollisionBox.Center, CharacterCollisionBox.HalfSize - Vector2.UnitY * 2));
+
+                foreach (var e in collidedBoxes)
+                {
+                    if (addPos.X > 0)
+                        Position = new Vector2(e.Center.X - e.HalfSize.X - CharacterCollisionBox.HalfSize.X - CharacterCollisionBoxOffSet.X, Position.Y);
+                    else
+                        Position = new Vector2(e.Center.X + e.HalfSize.X + CharacterCollisionBox.HalfSize.X - CharacterCollisionBoxOffSet.X, Position.Y);
+                }
+            }
+
+            Position += new Vector2(0, addPos.Y);
+            collidedBoxes = CollisionBoxManager.IntersectWithMap(
+                    new CollisionBox(CharacterCollisionBox.Center, CharacterCollisionBox.HalfSize - Vector2.UnitX * 2));
+            foreach (var e in collidedBoxes)
+            {
+                if (addPos.Y > 0)
+                {
+                    Position = new Vector2(Position.X, e.Center.Y - e.HalfSize.Y - CharacterCollisionBox.HalfSize.Y - CharacterCollisionBoxOffSet.Y);
+                    if (State == CharacterState.FALL)
+                    {
+                        ActionIdle();
+                    }
+                }
+                else
+                {
+                    Position = new Vector2(Position.X, e.Center.Y - e.HalfSize.Y - CharacterCollisionBox.HalfSize.Y - CharacterCollisionBoxOffSet.Y);
+                    if (State == CharacterState.JUMP)
+                    {
+                        ActionFall();
+                        Speed = new Vector2(Speed.X, 0);
+                    }
+
+                }
+            }
+
+            if (State != CharacterState.JUMP && State != CharacterState.FALL && collidedBoxes.Count == 0)
+                ActionFall();
+
+            /*
             if (State != CharacterState.JUMP && State != CharacterState.FALL && !CollisionBoxManager.IntersectWithMap(CharacterCollisionBox))
                 ActionFall();
             else if ((State == CharacterState.FALL || State == CharacterState.JUMP) && CollisionBoxManager.IntersectWithMap(CharacterCollisionBox))
                 ActionIdle();
+
+            */
+
         }
 
         abstract public void ActionIdle();
