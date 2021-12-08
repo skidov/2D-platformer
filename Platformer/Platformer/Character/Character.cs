@@ -103,39 +103,36 @@ namespace Platformer.Character
             Position += new Vector2(0, addPos.Y);
             collidedBoxes = CollisionBoxManager.IntersectWithMap(
                     new CollisionBox(CharacterCollisionBox.Center, CharacterCollisionBox.HalfSize - Vector2.UnitX * 2));
-            foreach (var e in collidedBoxes)
+            if (addPos.Y != 0)
             {
-                if (addPos.Y > 0)
+                foreach (var e in collidedBoxes)
                 {
-                    Position = new Vector2(Position.X, e.Center.Y - e.HalfSize.Y - CharacterCollisionBox.HalfSize.Y - CharacterCollisionBoxOffSet.Y);
-                    if (State == CharacterState.FALL)
+                    if (addPos.Y > 0)
                     {
-                        ActionIdle();
+                        Position = new Vector2(Position.X, e.Center.Y - e.HalfSize.Y - CharacterCollisionBox.HalfSize.Y - CharacterCollisionBoxOffSet.Y);
+                        if (State == CharacterState.FALL)
+                        {
+                            ActionIdle();
+                        }
                     }
-                }
-                else
-                {
-                    Position = new Vector2(Position.X, e.Center.Y - e.HalfSize.Y - CharacterCollisionBox.HalfSize.Y - CharacterCollisionBoxOffSet.Y);
-                    if (State == CharacterState.JUMP)
+                    else
                     {
-                        ActionFall();
-                        Speed = new Vector2(Speed.X, 0);
-                    }
+                        Position = new Vector2(Position.X, e.Center.Y + e.HalfSize.Y + CharacterCollisionBox.HalfSize.Y - CharacterCollisionBoxOffSet.Y);
+                        if (State == CharacterState.JUMP)
+                        {
+                            ActionFall();
+                            Speed = new Vector2(Speed.X, 0);
+                        }
 
+                    }
                 }
             }
 
             if (State != CharacterState.JUMP && State != CharacterState.FALL && collidedBoxes.Count == 0)
                 ActionFall();
 
-            /*
-            if (State != CharacterState.JUMP && State != CharacterState.FALL && !CollisionBoxManager.IntersectWithMap(CharacterCollisionBox))
+            if (State == CharacterState.JUMP && Speed.Y > 0)
                 ActionFall();
-            else if ((State == CharacterState.FALL || State == CharacterState.JUMP) && CollisionBoxManager.IntersectWithMap(CharacterCollisionBox))
-                ActionIdle();
-
-            */
-
         }
 
         abstract public void ActionIdle();

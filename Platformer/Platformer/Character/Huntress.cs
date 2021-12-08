@@ -65,8 +65,7 @@ namespace Platformer.Character
                 case CharacterState.JUMP:
                     if (MoveWhileFall)
                         SetUpRunSeed(WALK_SPEED);
-                    if (Speed.Y > 0)
-                        ActionFall();
+                    
                     break;
                 case CharacterState.RUN:              
                     SetUpRunSeed(WALK_SPEED);
@@ -141,7 +140,7 @@ namespace Platformer.Character
         public override void ActionAttack1()
         {
             Animation.NewSpriteSheet(spriteSheetAttack1);
-            Animation.AnimationTime = 0.15;
+            Animation.AnimationTime = 0.12;
             Animation.Repeat = false;
             State = CharacterState.ATTACK;
         }
@@ -149,7 +148,7 @@ namespace Platformer.Character
         public override void ActionAttack2()
         {
             Animation.NewSpriteSheet(spriteSheetAttack2);
-            Animation.AnimationTime = 0.15;
+            Animation.AnimationTime = 0.22;
             Animation.Repeat = false;
             State = CharacterState.ATTACK;
         }
