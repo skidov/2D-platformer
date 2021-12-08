@@ -16,6 +16,7 @@ namespace Platformer
         public static int ScreenWidth { get; private set; }
         public static int ScreenHeight { get; private set; }
 
+        MapManager mapManager;
         BasicMap basicMap;
 
         public Game1()
@@ -40,16 +41,10 @@ namespace Platformer
 
             // TODO: use this.Content to load your game content here
 
-            Huntress.LoadContent(Content);
-            
 
-            Skeleton.LoadContent(Content);
-            /*
-            skeleton = new Skeleton(new Vector2(50, 0));
-            enemyController = new EnemyCharacterController(skeleton, 50, 300);*/
 
-            basicMap = new BasicMap();
-            basicMap.LoadContent(Content, GraphicsDevice);
+            basicMap = new BasicMap(Content, GraphicsDevice);
+            mapManager = new MapManager(basicMap);
         }
 
         protected override void Update(GameTime gameTime)
@@ -59,7 +54,7 @@ namespace Platformer
 
             // TODO: Add your update logic here
 
-            basicMap.Update(gameTime);
+            mapManager.Update(gameTime);
 
             
             //enemyController.Update(gameTime);
@@ -74,7 +69,7 @@ namespace Platformer
 
             // TODO: Add your drawing code here
 
-            basicMap.Draw(_spriteBatch, gameTime);
+            mapManager.Draw(_spriteBatch, gameTime);
 
             base.Draw(gameTime);
         }
