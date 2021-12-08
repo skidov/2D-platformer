@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.ViewportAdapters;
 using Platformer.Character;
 using Platformer.Collision;

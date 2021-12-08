@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Platformer.Character;
 using System.Collections.Generic;
 
 namespace Platformer.Collision
@@ -8,8 +9,8 @@ namespace Platformer.Collision
     class CollisionBoxManager
     {
         private static Texture2D _pointTexture;
-        private static List<CollisionBox> playerCharactersBoxes = new List<CollisionBox>();
-        private static List<CollisionBox> enemyCharactersBoxes = new List<CollisionBox>();
+        private static Dictionary<CollisionBox, PlayerCharacter> playerCharactersBoxes = new Dictionary<CollisionBox, PlayerCharacter>();
+        private static Dictionary<CollisionBox, EnemyCharacter> enemyCharactersBoxes = new Dictionary<CollisionBox, EnemyCharacter>();
         private static List<CollisionBox> gameEndBoxes = new List<CollisionBox>();
         private static List<CollisionBox> mapBoxes = new List<CollisionBox>();
 
@@ -21,14 +22,14 @@ namespace Platformer.Collision
             mapBoxes.Clear();
         }
 
-        public static void AddPlayerCollisionBox(CollisionBox collisionBox)
+        public static void AddPlayerCollisionBox(CollisionBox collisionBox, PlayerCharacter character)
         {
-            playerCharactersBoxes.Add(collisionBox);
+            playerCharactersBoxes.Add(collisionBox, character);
         }
 
-        public static void AddEnemyCollisionBox(CollisionBox collisionBox)
+        public static void AddEnemyCollisionBox(CollisionBox collisionBox, EnemyCharacter character)
         {
-            enemyCharactersBoxes.Add(collisionBox);
+            enemyCharactersBoxes.Add(collisionBox, character);
         }
 
         public static void AddGameEndCollisionBox(CollisionBox collisionBox)
@@ -73,12 +74,36 @@ namespace Platformer.Collision
             return collidedBoxes;
         }
 
+        public static List<PlayerCharacter> IntersectWithPlayer(CollisionBox collisionBox)
+        {
+            List<PlayerCharacter> collidedBoxes = new List<PlayerCharacter>();
+
+            foreach (var e in playerCharactersBoxes)
+            {
+                if (collisionBox.IsCollided(e.Key))
+                    collidedBoxes.Add(e.Value);
+            }
+            return collidedBoxes;
+        }
+
+        public static List<EnemyCharacter> IntersectWithEnemy(CollisionBox collisionBox)
+        {
+            List<EnemyCharacter> collidedBoxes = new List<EnemyCharacter>();
+
+            foreach (var e in enemyCharactersBoxes)
+            {
+                if (collisionBox.IsCollided(e.Key))
+                    collidedBoxes.Add(e.Value);
+            }
+            return collidedBoxes;
+        }
+
         public static void Draw(SpriteBatch spriteBatch)
         {
             foreach (var e in playerCharactersBoxes)
-                DrawCollisionBox(spriteBatch, e, Color.Red);
+                DrawCollisionBox(spriteBatch, e.Key, Color.Red);
             foreach (var e in enemyCharactersBoxes)
-                DrawCollisionBox(spriteBatch, e, Color.Red);
+                DrawCollisionBox(spriteBatch, e.Key, Color.Red);
             foreach (var e in gameEndBoxes)
                 DrawCollisionBox(spriteBatch, e, Color.Blue);
             foreach (var e in mapBoxes)
