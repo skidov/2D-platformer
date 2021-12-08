@@ -2,9 +2,10 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
-using Platformer.Camera;
+using MonoGame.Extended.ViewportAdapters;
 using Platformer.Character;
 using Platformer.Collision;
 using System.Collections.Generic;
@@ -17,13 +18,15 @@ namespace Platformer.Map
         internal PlayerCharacterController playerController;
         internal PlayerCharacter player;
         internal List<EnemyCharacterController> enemyControllers;
-        internal GameCamera camera;
+        internal OrthographicCamera _camera;
 
-        public MapManager(Map map)
+        public MapManager(Map map, GraphicsDevice graphicsDevice, GameWindow window)
         {
-            camera = new GameCamera();
             enemyControllers = new List<EnemyCharacterController>();
             this.map = map;
+
+            var viewportAdapter = new BoxingViewportAdapter(window, graphicsDevice, 960, 720);
+            _camera = new OrthographicCamera(viewportAdapter);
 
             LoadObjects();
         }
@@ -80,7 +83,8 @@ namespace Platformer.Map
         public void Update(GameTime gameTime)
         {
             playerController.Update(gameTime);
-            camera.Follow(player.CharacterCollisionBox.Center);
+
+            _camera.LookAt(player.CharacterCollisionBox.Center);
 
             foreach (var e in enemyControllers)
             {
@@ -96,9 +100,9 @@ namespace Platformer.Map
             DrawBackground(spriteBatch);
             spriteBatch.End();
 
-            DrawMap(gameTime, camera);
+            DrawMap(gameTime);
 
-            spriteBatch.Begin(transformMatrix: camera.Transform);
+            spriteBatch.Begin(transformMatrix: _camera.GetViewMatrix());
 
             playerController.Draw(gameTime, spriteBatch);
 
@@ -117,18 +121,18 @@ namespace Platformer.Map
         {
             foreach (var e in map.BackGround)
             {
-                _spritebatch.Draw(e, new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
+                _spritebatch.Draw(e, new Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height), Color.White);
             }
         }
 
-        private void DrawMap(GameTime gameTime, GameCamera camera)
+        private void DrawMap(GameTime gameTime)
         {
             foreach (TiledMapLayer layer in map._TiledMap.Layers)
             {
                 Matrix scaleMatrix = Matrix.CreateScale(map.Scale);
                 if (layer.Name == "Map")
                 {
-                    map._TiledMapRenderer.Draw(layer, viewMatrix: scaleMatrix * camera.Transform);
+                    map._TiledMapRenderer.Draw(layer, viewMatrix: scaleMatrix * _camera.GetViewMatrix());
                 }
             }
         }

@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Platformer.Camera;
-using Platformer.Character;
 using Platformer.Map;
-using Platformer.Collision;
 
 namespace Platformer
 {
@@ -24,6 +21,10 @@ namespace Platformer
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            _graphics.IsFullScreen = false;
+            
+            _graphics.ApplyChanges();
         }
 
         protected override void Initialize()
@@ -31,6 +32,10 @@ namespace Platformer
             // TODO: Add your initialization logic here
             ScreenWidth = _graphics.PreferredBackBufferWidth;
             ScreenHeight = _graphics.PreferredBackBufferHeight;
+            System.Diagnostics.Debug.WriteLine("" + GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width);
+            System.Diagnostics.Debug.WriteLine("" + GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+            System.Diagnostics.Debug.WriteLine("" + _graphics.PreferredBackBufferWidth);
+            System.Diagnostics.Debug.WriteLine("" + _graphics.PreferredBackBufferHeight);
 
             base.Initialize();
         }
@@ -44,7 +49,7 @@ namespace Platformer
 
 
             basicMap = new BasicMap(Content, GraphicsDevice);
-            mapManager = new MapManager(basicMap);
+            mapManager = new MapManager(basicMap, GraphicsDevice, Window);
         }
 
         protected override void Update(GameTime gameTime)
