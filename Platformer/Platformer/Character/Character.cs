@@ -17,6 +17,8 @@ namespace Platformer.Character
         internal Animation Animation { get; set; }
         public CharacterState State { get; internal set; }
 
+        public int Health { get; private set; }
+
         public CollisionBox CharacterCollisionBox { get; set; }
         internal Vector2 CharacterCollisionBoxOffSet { get; set; }
         public Vector2 Speed { get; set; }
@@ -133,6 +135,14 @@ namespace Platformer.Character
 
             if (State == CharacterState.JUMP && Speed.Y > 0)
                 ActionFall();
+        }
+
+        public void Hit(int damage)
+        {
+            Health -= damage;
+            if (Health < 0)
+                Health = 0;
+            
         }
 
         abstract public void ActionIdle();
