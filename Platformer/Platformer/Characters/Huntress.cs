@@ -60,7 +60,7 @@ namespace Platformer.Characters
             Attack2CollisionBoxRightOffSet = Attack1CollisionBoxRightOffSet;
 
             Direction = CharacterDirection.RIGHT;
-            Health = 10;
+            Health = 5;
 
             Animation = new Animation(spriteSheetIdle, true, 0.15);
             Animation.Effect = SpriteEffects.None;

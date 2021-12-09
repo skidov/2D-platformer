@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using Platformer.Characters;
+using Platformer.Traps;
 using System.Collections.Generic;
 
 namespace Platformer.Map
@@ -24,6 +25,7 @@ namespace Platformer.Map
 
             Huntress.LoadContent(content);
             Skeleton.LoadContent(content);
+            SpikesTrap.LoadContent(content);
         }
     }
 }

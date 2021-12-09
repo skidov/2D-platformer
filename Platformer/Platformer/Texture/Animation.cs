@@ -31,6 +31,7 @@ namespace Platformer.Texture
         public bool IsEnded { get; private set; }
         public SpriteEffects Effect { get; set; }
         public float Scale { get; set; }
+        public bool Stop { get; set; }
 
         public Animation(SpriteSheet spriteSheet, bool repeat, double animationTime)
         {
@@ -40,6 +41,7 @@ namespace Platformer.Texture
             IsEnded = false;
             Effect = SpriteEffects.None;
             Scale = 1.0f;
+            Stop = false;
         }
 
         /**
@@ -52,6 +54,7 @@ namespace Platformer.Texture
             elapsedTime = 0;
             lastSwitch = 0;
             IsEnded = false;
+            Stop = false;
         }
 
         public void NewSpriteSheet(SpriteSheet spriteSheet)
@@ -61,21 +64,25 @@ namespace Platformer.Texture
             elapsedTime = 0;
             lastSwitch = 0;
             IsEnded = false;
+            Stop = false;
         }
 
         public void Update(GameTime gameTime)
         {
-            elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
-            while (lastSwitch + AnimationTime < elapsedTime)
+            if (!Stop)
             {
-                lastSwitch += AnimationTime;
-                int nextPositionX = SpritePositionX + 1;
-                if (nextPositionX < spriteSheet.SpriteXCount)
-                    SpritePositionX = nextPositionX;
-                else if (Repeat)
-                    SpritePositionX = 0;
-                else
-                    IsEnded = true;
+                elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
+                while (lastSwitch + AnimationTime < elapsedTime)
+                {
+                    lastSwitch += AnimationTime;
+                    int nextPositionX = SpritePositionX + 1;
+                    if (nextPositionX < spriteSheet.SpriteXCount)
+                        SpritePositionX = nextPositionX;
+                    else if (Repeat)
+                        SpritePositionX = 0;
+                    else
+                        IsEnded = true;
+                }
             }
         }
 

@@ -8,6 +8,7 @@ using Platformer.Characters;
 using Platformer.Collision;
 using Platformer.Maps;
 using Platformer.Scenes;
+using Platformer.Traps;
 using System.Collections.Generic;
 
 namespace Platformer.Map
@@ -21,6 +22,7 @@ namespace Platformer.Map
         private PlayerChacterType playerType;
         private List<EnemyCharacterController> enemyControllers;
         private List<EnemyCharacter> diedEnemy;
+        private List<Trap> traps;
         private OrthographicCamera _camera;
         private SpriteFont font;
         private ContentManager content;
@@ -29,6 +31,7 @@ namespace Platformer.Map
         {
             enemyControllers = new List<EnemyCharacterController>();
             diedEnemy = new List<EnemyCharacter>();
+            traps = new List<Trap>();
             this.gameScene = gameScene;
             this.playerType = playerType;
             this.content = content;
@@ -98,6 +101,17 @@ namespace Platformer.Map
                         }
                     }
                 }
+                else if (e.Name == "Traps")
+                {
+                    foreach (var o in e.Objects)
+                    {
+                        if (o.Name == "SpikesTrap")
+                        {
+                            SpikesTrap trap = new SpikesTrap(o.Position * scale);
+                            traps.Add(trap);
+                        }
+                    }
+                }
             }
 
             font = content.Load<SpriteFont>("Fonts/Font");
@@ -115,14 +129,13 @@ namespace Platformer.Map
             _camera.LookAt(player.CharacterCollisionBox.Center);
 
             foreach (var e in enemyControllers)
-            {
                 e.Update(gameTime);
-            }
 
             foreach (var e in diedEnemy)
-            {
                 e.Update(gameTime);
-            }
+
+            foreach (var e in traps)
+                e.Update(gameTime);
 
             map._TiledMapRenderer.Update(gameTime);
 
@@ -143,16 +156,15 @@ namespace Platformer.Map
             playerController.Draw(gameTime, spriteBatch);
 
             foreach (var e in enemyControllers)
-            {
                 e.Draw(gameTime, spriteBatch);
-            }
 
             foreach (var e in diedEnemy)
-            {
                 e.Draw(gameTime, spriteBatch);
-            }
 
-            CollisionBoxManager.Draw(spriteBatch);
+            foreach (var e in traps)
+                e.Draw(gameTime, spriteBatch);
+
+            //CollisionBoxManager.Draw(spriteBatch);
 
             spriteBatch.End();
 
