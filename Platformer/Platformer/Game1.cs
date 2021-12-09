@@ -19,7 +19,8 @@ namespace Platformer
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            _graphics.IsFullScreen = false;
+            _graphics.IsFullScreen = true;
+
             _graphics.ApplyChanges();
         }
 

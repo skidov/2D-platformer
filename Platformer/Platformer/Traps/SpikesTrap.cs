@@ -61,7 +61,6 @@ namespace Platformer.Traps
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Animation.Draw(spriteBatch, Position);
-            CollisionBoxManager.DrawCollisionBox(spriteBatch, TrapAttackCollisionBox, Color.Black);
         }
     }
 }
