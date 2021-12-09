@@ -21,12 +21,15 @@ namespace Platformer.Map
         private PlayerChacterType playerType;
         private List<EnemyCharacterController> enemyControllers;
         private OrthographicCamera _camera;
+        private SpriteFont font;
+        private ContentManager content;
 
         public MapManager(GameScene gameScene, MapType mapType, PlayerChacterType playerType, Game game, ContentManager content)
         {
             enemyControllers = new List<EnemyCharacterController>();
             this.gameScene = gameScene;
             this.playerType = playerType;
+            this.content = content;
 
             switch (mapType)
             {
@@ -94,6 +97,8 @@ namespace Platformer.Map
                     }
                 }
             }
+
+            font = content.Load<SpriteFont>("Fonts/Font");
         }
 
         internal CollisionBox GenerateCollisionBox(TiledMapObject to, float scale)
@@ -137,7 +142,10 @@ namespace Platformer.Map
 
             CollisionBoxManager.Draw(spriteBatch);
 
+            spriteBatch.End();
 
+            spriteBatch.Begin();
+            spriteBatch.DrawString(font, "Character Health: " + player.Health.ToString(), new Vector2(10, 10), Color.Black);
             spriteBatch.End();
         }
 

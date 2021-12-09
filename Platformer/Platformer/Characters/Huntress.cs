@@ -40,6 +40,7 @@ namespace Platformer.Characters
             CollisionBoxManager.AddPlayerCollisionBox(CharacterCollisionBox, this);
             
             Direction = CharacterDirection.RIGHT;
+            Health = 10;
 
             Animation = new Animation(spriteSheetIdle, true, 0.15);
             Animation.Effect = SpriteEffects.None;

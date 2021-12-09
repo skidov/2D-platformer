@@ -21,6 +21,8 @@ namespace Platformer.Scenes
             this._Game = game;
             this.mapType = mapType;
             this.playerType = playerType;
+
+            game.IsMouseVisible = false;
         }
 
         public override void LoadContent()

@@ -23,7 +23,9 @@ namespace Platformer
             IsMouseVisible = true;
 
             _graphics.IsFullScreen = false;
-            
+            _graphics.PreferredBackBufferWidth = ScreenWidth;
+            _graphics.PreferredBackBufferHeight = ScreenHeight;
+
             _graphics.ApplyChanges();
         }
 

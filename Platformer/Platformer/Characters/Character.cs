@@ -20,7 +20,7 @@ namespace Platformer.Characters
         internal Animation Animation { get; set; }
         public CharacterState State { get; internal set; }
 
-        public int Health { get; private set; }
+        public int Health { get; internal set; }
 
         public CollisionBox CharacterCollisionBox { get; set; }
         internal Vector2 CharacterCollisionBoxOffSet { get; set; }

@@ -9,14 +9,16 @@ namespace Platformer.Scenes
 {
     public class MenuScene : Scene
     {
+        private SpriteFont font;
+
         public MenuScene(Game1 game, ContentManager content) : base(game, content)
         {
-
+            game.IsMouseVisible = true;
         }
 
         public override void LoadContent()
         {
-            throw new NotImplementedException();
+            font = Content.Load<SpriteFont>("Fonts/Font");
         }
 
         public override void Update(GameTime gameTime)
