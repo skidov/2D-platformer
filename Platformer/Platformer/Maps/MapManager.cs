@@ -54,7 +54,7 @@ namespace Platformer.Map
                     break;
             }
 
-            var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, 960, 540);
+            var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, 640, 360);
             _camera = new OrthographicCamera(viewportAdapter);
 
             LoadObjects();
