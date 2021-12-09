@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Platformer.Collision;
 using Platformer.Texture;
 
-namespace Platformer.Character
+namespace Platformer.Characters
 {
     public class Huntress : PlayerCharacter
     {

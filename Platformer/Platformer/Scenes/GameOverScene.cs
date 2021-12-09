@@ -8,7 +8,7 @@ namespace Platformer.Scenes
 {
     public class GameOverScene : Scene
     {
-        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public override void LoadContent()
         {
             throw new NotImplementedException();
         }
@@ -17,5 +17,11 @@ namespace Platformer.Scenes
         {
             throw new NotImplementedException();
         }
+
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

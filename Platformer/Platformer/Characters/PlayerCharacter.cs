@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Platformer.Character
+namespace Platformer.Characters
 {
     public abstract class PlayerCharacter : Character
     {

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.ViewportAdapters;
-using Platformer.Character;
+using Platformer.Characters;
 using Platformer.Collision;
 using System.Collections.Generic;
 
@@ -133,5 +133,7 @@ namespace Platformer.Map
                 }
             }
         }
+
+        public void CharacterDie(Character character)
     }
 }

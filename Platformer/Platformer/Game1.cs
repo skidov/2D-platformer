@@ -70,7 +70,7 @@ namespace Platformer
             base.Draw(gameTime);
         }
 
-        public void SetUpMapmanager(GameMap map)
+        public void SetUpMapmanager(Map.Map map)
         {
             mapManager = new MapManager(map, GraphicsDevice, Window);
         }

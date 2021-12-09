@@ -6,7 +6,7 @@ using Platformer.Texture;
 using System;
 using System.Collections.Generic;
 
-namespace Platformer.Character
+namespace Platformer.Characters
 {
     public abstract class Character
     {

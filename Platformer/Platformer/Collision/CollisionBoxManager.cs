@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Platformer.Character;
+using Platformer.Characters;
 using System.Collections.Generic;
 
 namespace Platformer.Collision

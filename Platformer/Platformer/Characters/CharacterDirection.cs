@@ -1,4 +1,4 @@
-﻿namespace Platformer.Character
+﻿namespace Platformer.Characters
 {
     public enum CharacterDirection
     {
