@@ -20,6 +20,7 @@ namespace Platformer.Map
         private PlayerCharacter player;
         private PlayerChacterType playerType;
         private List<EnemyCharacterController> enemyControllers;
+        private List<EnemyCharacter> diedEnemy;
         private OrthographicCamera _camera;
         private SpriteFont font;
         private ContentManager content;
@@ -27,6 +28,7 @@ namespace Platformer.Map
         public MapManager(GameScene gameScene, MapType mapType, PlayerChacterType playerType, Game game, ContentManager content)
         {
             enemyControllers = new List<EnemyCharacterController>();
+            diedEnemy = new List<EnemyCharacter>();
             this.gameScene = gameScene;
             this.playerType = playerType;
             this.content = content;
@@ -117,6 +119,11 @@ namespace Platformer.Map
                 e.Update(gameTime);
             }
 
+            foreach (var e in diedEnemy)
+            {
+                e.Update(gameTime);
+            }
+
             map._TiledMapRenderer.Update(gameTime);
 
             if (CollisionBoxManager.IntersectWithGameEndBoxes(player.CharacterCollisionBox))
@@ -136,6 +143,11 @@ namespace Platformer.Map
             playerController.Draw(gameTime, spriteBatch);
 
             foreach (var e in enemyControllers)
+            {
+                e.Draw(gameTime, spriteBatch);
+            }
+
+            foreach (var e in diedEnemy)
             {
                 e.Draw(gameTime, spriteBatch);
             }
@@ -177,11 +189,9 @@ namespace Platformer.Map
             } 
             else 
             {
-                foreach (var e in enemyControllers)
-                {
-                    if (e.Character == character)
-                        enemyControllers.Remove(e);
-                }
+                CollisionBoxManager.RemoveEnemyCollisionBox(character.CharacterCollisionBox);
+                enemyControllers.RemoveAll(x => x.Character == character);
+                diedEnemy.Add((EnemyCharacter)character);
             }
         }
     }

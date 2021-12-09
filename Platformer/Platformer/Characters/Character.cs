@@ -167,8 +167,11 @@ namespace Platformer.Characters
                     MapManager.CharacterDied(this);
                     ActionDeath();
                 }
-                HitTime = HIT_TIME;
-                ActionTakeHit();
+                else
+                {
+                    HitTime = HIT_TIME;
+                    ActionTakeHit();
+                }
             }
         }
 

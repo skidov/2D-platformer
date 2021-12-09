@@ -89,6 +89,8 @@ namespace Platformer.Characters
                     SetUpRunSeed(WALK_SPEED);    
                     break;
                 case CharacterState.TAKEHIT:
+                    if (Animation.IsEnded)
+                        ActionIdle();
                     break;             
             }
 
@@ -99,7 +101,6 @@ namespace Platformer.Characters
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Animation.Draw(spriteBatch, Position);
-            CollisionBoxManager.DrawCollisionBox(spriteBatch, GetAttackCollisionBox, Color.Black);
         }
 
         public override void ActionIdle()
@@ -114,6 +115,8 @@ namespace Platformer.Characters
 
         public override void ActionDeath()
         {
+            Speed = Vector2.Zero;
+
             Animation.NewSpriteSheet(spriteSheetDeath);
             Animation.AnimationTime = 0.15;
             Animation.Repeat = false;

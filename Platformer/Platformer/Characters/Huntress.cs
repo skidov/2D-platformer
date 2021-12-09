@@ -17,6 +17,19 @@ namespace Platformer.Characters
         private const float WALK_SPEED = 100.0f;
         private const float JUMP_SPEED = 130.0f;
 
+        private const int ATTACK_COLLISION_BOX_OFF_SET_X = 62;
+        private const int ATTACK_COLLISION_BOX_OFF_SET_Y = 102;
+        private const int ATTACK_COLLISION_BOX_HALF_SIZE_X = 20;
+        private const int ATTACK_COLLISION_BOX_HALF_SIZE_Y = 18;
+        private const int ATTACK_COLLISION_BOX_RIGHT_DIRECTION_OFF_SET = 66;
+        private const float ATTACK1_TIME = 0.3f;
+        private const int ATTACK1_STRENGTH = 1;
+        private const float ATTACK2_TIME = 0.6f;
+        private const int ATTACK2_STRENGTH = 2;
+
+        private float attackTime;
+        private int attackType;
+
         private static SpriteSheet spriteSheetIdle, spriteSheetDeath, spriteSheetFall, spriteSheetJump, spriteSheetRun, spriteSheetTakeHit, spriteSheetAttack1, spriteSheetAttack2;
 
         public static void LoadContent(ContentManager content)
@@ -38,7 +51,14 @@ namespace Platformer.Characters
             this.Position = pos - CharacterCollisionBoxOffSet - new Vector2(0, COLLISION_BOX_HALF_SIZE_Y);
 
             CollisionBoxManager.AddPlayerCollisionBox(CharacterCollisionBox, this);
-            
+
+            Attack1CollisionBoxOffSet = new Vector2(ATTACK_COLLISION_BOX_OFF_SET_X, ATTACK_COLLISION_BOX_OFF_SET_Y);
+            Attack1CollisionBoxHalfSize = new Vector2(ATTACK_COLLISION_BOX_HALF_SIZE_X, ATTACK_COLLISION_BOX_HALF_SIZE_Y);
+            Attack1CollisionBoxRightOffSet = ATTACK_COLLISION_BOX_RIGHT_DIRECTION_OFF_SET;
+            Attack2CollisionBoxOffSet = Attack1CollisionBoxOffSet;
+            Attack2CollisionBoxHalfSize = Attack1CollisionBoxHalfSize;
+            Attack2CollisionBoxRightOffSet = Attack1CollisionBoxRightOffSet;
+
             Direction = CharacterDirection.RIGHT;
             Health = 10;
 
@@ -57,6 +77,24 @@ namespace Platformer.Characters
                 case CharacterState.ATTACK:
                     if (Animation.IsEnded)
                         ActionIdle();
+                    else if (attackTime > 0)
+                        attackTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    else if (attackType == 1)
+                    {
+                        var enemys = CollisionBoxManager.IntersectWithEnemy(GetAttack1CollisionBox);
+                        foreach (var e in enemys)
+                        {
+                            e.Hit(ATTACK1_STRENGTH);
+                        }
+                    }
+                    else if (attackType == 2)
+                    {
+                        var enemys = CollisionBoxManager.IntersectWithEnemy(GetAttack2CollisionBox);
+                        foreach (var e in enemys)
+                        {
+                            e.Hit(ATTACK2_STRENGTH);
+                        }
+                    }
                     break;
                 case CharacterState.DEATH:
                     break;
@@ -101,6 +139,8 @@ namespace Platformer.Characters
 
         public override void ActionDeath()
         {
+            Speed = Vector2.Zero;
+
             Animation.NewSpriteSheet(spriteSheetDeath);
             Animation.AnimationTime = 0.15;
             Animation.Repeat = false;
@@ -153,6 +193,8 @@ namespace Platformer.Characters
             Animation.AnimationTime = 0.12;
             Animation.Repeat = false;
             State = CharacterState.ATTACK;
+            attackTime = ATTACK1_TIME;
+            attackType = 1;
         }
 
         public override void ActionAttack2()
@@ -163,6 +205,8 @@ namespace Platformer.Characters
             Animation.AnimationTime = 0.22;
             Animation.Repeat = false;
             State = CharacterState.ATTACK;
+            attackTime = ATTACK2_TIME;
+            attackType = 2;
         }
     }
 }
