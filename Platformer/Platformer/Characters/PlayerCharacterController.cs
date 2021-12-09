@@ -6,61 +6,61 @@ namespace Platformer.Characters
 {
     public class PlayerCharacterController
     {
-        PlayerCharacter character;
+        public PlayerCharacter Character { get; private set; }
 
         public PlayerCharacterController(PlayerCharacter character)
         {
-            this.character = character;
+            this.Character = character;
         }
 
         public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.A))
-                character.Direction = CharacterDirection.LEFT;
+                Character.Direction = CharacterDirection.LEFT;
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
-                character.Direction = CharacterDirection.RIGHT;
+                Character.Direction = CharacterDirection.RIGHT;
 
-            switch (character.State)
+            switch (Character.State)
             {
                 case CharacterState.IDLE:
                     if (Keyboard.GetState().IsKeyDown(Keys.N))
-                        character.ActionAttack1();
+                        Character.ActionAttack1();
                     else if (Keyboard.GetState().IsKeyDown(Keys.M))
-                        character.ActionAttack2();
+                        Character.ActionAttack2();
                     else if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
-                        character.ActionRun();
+                        Character.ActionRun();
                     else if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                        character.ActionJump();
+                        Character.ActionJump();
                      break;
                 case CharacterState.RUN:
                     if (Keyboard.GetState().IsKeyDown(Keys.N))
-                        character.ActionAttack1();
+                        Character.ActionAttack1();
                     else if (Keyboard.GetState().IsKeyDown(Keys.M))
-                        character.ActionAttack2();
+                        Character.ActionAttack2();
                     else if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                        character.ActionJump();
+                        Character.ActionJump();
                     else if (!Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D))
-                        character.ActionIdle();
+                        Character.ActionIdle();
                     break;
                 case CharacterState.JUMP:
                     if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
-                        character.MoveWhileFall = true;
+                        Character.MoveWhileFall = true;
                     else
-                        character.MoveWhileFall = false;
+                        Character.MoveWhileFall = false;
                     break;
                 case CharacterState.FALL:
                     if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
-                        character.MoveWhileFall = true;
+                        Character.MoveWhileFall = true;
                     else
-                        character.MoveWhileFall = false;
+                        Character.MoveWhileFall = false;
                     break;
             }
-            character.Update(gameTime);
+            Character.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            character.Draw(gameTime, spriteBatch);
+            Character.Draw(gameTime, spriteBatch);
         }
     }
 }

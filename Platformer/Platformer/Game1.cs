@@ -15,7 +15,6 @@ namespace Platformer
         public static int ScreenHeight { get; private set; }
 
         Scene actualScene;
-        MapManager mapManager;
 
         public Game1()
         {
@@ -43,8 +42,7 @@ namespace Platformer
 
             // TODO: use this.Content to load your game content here
 
-            SetUpMapmanager(new BasicMap(Content, GraphicsDevice));
-            ChangeScene(GameState.GAME);
+            ChangeScene(new GameScene(this, Content, Maps.MapType.BASICMAP, Characters.PlayerChacterType.HUNTRESS));
         }
 
         protected override void Update(GameTime gameTime)
@@ -70,17 +68,10 @@ namespace Platformer
             base.Draw(gameTime);
         }
 
-        public void SetUpMapmanager(Map.Map map)
+        public void ChangeScene(Scene scene)
         {
-            mapManager = new MapManager(map, GraphicsDevice, Window);
-        }
-
-        public void ChangeScene(GameState scene)
-        {
-            if (scene == GameState.GAME)
-            {
-                actualScene = new GameScene(mapManager);
-            }
+            actualScene = scene;
+            actualScene.LoadContent();
         }
     }
 }

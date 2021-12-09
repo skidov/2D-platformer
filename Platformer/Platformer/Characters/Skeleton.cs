@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Platformer.Collision;
+using Platformer.Map;
 using Platformer.Texture;
 
 namespace Platformer.Characters
@@ -26,7 +27,7 @@ namespace Platformer.Characters
             spriteSheetAttack = new SpriteSheet(content.Load<Texture2D>("Characters/Skeleton/Skeleton Attack"), 18, 1);
         }
 
-        public Skeleton(Vector2 pos)
+        public Skeleton(MapManager mapManager, Vector2 pos) : base(mapManager)
         {
             CharacterCollisionBoxOffSet = new Vector2(COLLISION_BOX_OFF_SET_X, COLLISION_BOX_OFF_SET_Y);
             CharacterCollisionBox = new CollisionBox(new Vector2(0, 0), new Vector2(COLLISION_BOX_HALF_SIZE_X, COLLISION_BOX_HALF_SIZE_Y));

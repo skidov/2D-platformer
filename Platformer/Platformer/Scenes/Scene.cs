@@ -8,9 +8,11 @@ namespace Platformer.Scenes
     public abstract class Scene
     {
         protected ContentManager Content { get; set; }
+        protected Game1 _Game { get; set; }
 
-        public Scene(ContentManager content)
+        public Scene(Game1 game, ContentManager content)
         {
+            _Game = game;
             Content = content;
         }
 

@@ -98,6 +98,16 @@ namespace Platformer.Collision
             return collidedBoxes;
         }
 
+        public static bool IntersectWithGameEndBoxes(CollisionBox collisionBox)
+        {
+            foreach (var e in gameEndBoxes)
+            {
+                if (collisionBox.IsCollided(e))
+                    return true;
+            }
+            return false;
+        }
+
         public static void Draw(SpriteBatch spriteBatch)
         {
             foreach (var e in playerCharactersBoxes)

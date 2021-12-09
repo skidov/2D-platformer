@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Platformer.Collision;
+using Platformer.Map;
 using Platformer.Texture;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Platformer.Characters
     {
         public const int MAX_FALLING_SPEED = 100;
         public const int GRAVITY = 100;
+
+        private MapManager MapManager { get; set; }
 
         private CharacterDirection direction;
         internal Animation Animation { get; set; }
@@ -56,6 +59,11 @@ namespace Platformer.Characters
                         Animation.Effect = SpriteEffects.None;
                 }
             }
+        }
+
+        public Character(MapManager mapManager)
+        {
+            MapManager = mapManager;
         }
 
         public abstract void Update(GameTime gameTime);
@@ -142,7 +150,8 @@ namespace Platformer.Characters
             Health -= damage;
             if (Health < 0)
                 Health = 0;
-            
+            if (Health == 0)
+                MapManager.CharacterDied(this);
         }
 
         abstract public void ActionIdle();

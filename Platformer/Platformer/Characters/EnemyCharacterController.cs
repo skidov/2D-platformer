@@ -6,36 +6,36 @@ namespace Platformer.Characters
 {
     public class EnemyCharacterController
     {
-        EnemyCharacter character;
+        public EnemyCharacter Character { get; private set; }
         float minXPos;
         float maxXPos;
 
         public EnemyCharacterController(EnemyCharacter character, float minXPos, float maxXPos)
         {
-            this.character = character;
+            this.Character = character;
             this.minXPos = minXPos;
             this.maxXPos = maxXPos;
         }
 
         public void Update(GameTime gameTime)
         {
-            Vector2 pos = character.Position;
+            Vector2 pos = Character.Position;
             if (pos.X > maxXPos)
-                character.Direction = CharacterDirection.LEFT;
+                Character.Direction = CharacterDirection.LEFT;
             else if (pos.X < minXPos)
-                character.Direction = CharacterDirection.RIGHT;
-            switch (character.State)
+                Character.Direction = CharacterDirection.RIGHT;
+            switch (Character.State)
             {
                 case CharacterState.IDLE:
-                    character.ActionRun();
+                    Character.ActionRun();
                     break;
             }
-            character.Update(gameTime);
+            Character.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            character.Draw(gameTime, spriteBatch);
+            Character.Draw(gameTime, spriteBatch);
         }
     }
 }

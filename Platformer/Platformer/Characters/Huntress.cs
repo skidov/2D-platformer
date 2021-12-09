@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Platformer.Collision;
+using Platformer.Map;
 using Platformer.Texture;
 
 namespace Platformer.Characters
@@ -30,7 +31,7 @@ namespace Platformer.Characters
             spriteSheetAttack2 = new SpriteSheet(content.Load<Texture2D>("Characters/Huntress/Attack2"), 5, 1);
         }
 
-        public Huntress(Vector2 pos) : base()
+        public Huntress(MapManager mapManager, Vector2 pos) : base(mapManager)
         {
             CharacterCollisionBoxOffSet = new Vector2(COLLISION_BOX_OFF_SET_X, COLLISION_BOX_OFF_SET_Y);
             CharacterCollisionBox = new CollisionBox(new Vector2(0, 0), new Vector2(COLLISION_BOX_HALF_SIZE_X, COLLISION_BOX_HALF_SIZE_Y));

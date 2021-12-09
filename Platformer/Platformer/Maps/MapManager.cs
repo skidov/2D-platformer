@@ -1,28 +1,44 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.ViewportAdapters;
 using Platformer.Characters;
 using Platformer.Collision;
+using Platformer.Maps;
+using Platformer.Scenes;
 using System.Collections.Generic;
 
 namespace Platformer.Map
 {
     public class MapManager
     {
-        internal GameMap map;
-        internal PlayerCharacterController playerController;
-        internal PlayerCharacter player;
-        internal List<EnemyCharacterController> enemyControllers;
-        internal OrthographicCamera _camera;
+        private GameScene gameScene;
+        private Map map;
+        private PlayerCharacterController playerController;
+        private PlayerCharacter player;
+        private PlayerChacterType playerType;
+        private List<EnemyCharacterController> enemyControllers;
+        private OrthographicCamera _camera;
 
-        public MapManager(GameMap map, GraphicsDevice graphicsDevice, GameWindow window)
+        public MapManager(GameScene gameScene, MapType mapType, PlayerChacterType playerType, Game game, ContentManager content)
         {
             enemyControllers = new List<EnemyCharacterController>();
-            this.map = map;
+            this.gameScene = gameScene;
+            this.playerType = playerType;
 
-            var viewportAdapter = new BoxingViewportAdapter(window, graphicsDevice, 960, 540);
+            switch (mapType)
+            {
+                case MapType.BASICMAP:
+                    this.map = new BasicMap(content, game.GraphicsDevice);
+                    break;
+                default:
+                    this.map = new BasicMap(content, game.GraphicsDevice);
+                    break;
+            }
+
+            var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, 960, 540);
             _camera = new OrthographicCamera(viewportAdapter);
 
             LoadObjects();
@@ -46,7 +62,15 @@ namespace Platformer.Map
                         }
                         else if (o.Name == "StartPoint")
                         {
-                            player = new Huntress(o.Position * scale);
+                            switch (playerType)
+                            {
+                                case PlayerChacterType.HUNTRESS:
+                                    player = new Huntress(this, o.Position * scale);
+                                    break;
+                                default:
+                                    player = new Huntress(this, o.Position * scale);
+                                    break;
+                            }
                             playerController = new PlayerCharacterController(player);
                         }
                     }
@@ -64,7 +88,7 @@ namespace Platformer.Map
                     {
                         if (o.Name == "Skeleton")
                         {
-                            EnemyCharacter enemy = new Skeleton(o.Position * scale);
+                            EnemyCharacter enemy = new Skeleton(this, o.Position * scale);
                             enemyControllers.Add(new EnemyCharacterController(enemy, o.Position.X * scale, o.Position.X * scale + o.Size.Width * scale));
                         }
                     }
@@ -89,6 +113,9 @@ namespace Platformer.Map
             }
 
             map._TiledMapRenderer.Update(gameTime);
+
+            if (CollisionBoxManager.IntersectWithGameEndBoxes(player.CharacterCollisionBox))
+                gameScene.PlayerWin();
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -134,6 +161,20 @@ namespace Platformer.Map
             }
         }
 
-        public void CharacterDie(Character character)
+        public void CharacterDied(Character character)
+        {
+            if (player == character)
+            {
+                gameScene.PlayerDied();
+            } 
+            else 
+            {
+                foreach (var e in enemyControllers)
+                {
+                    if (e.Character == character)
+                        enemyControllers.Remove(e);
+                }
+            }
+        }
     }
 }
