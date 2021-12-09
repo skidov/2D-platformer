@@ -14,7 +14,7 @@ namespace Platformer.Characters
         public const int MAX_FALLING_SPEED = 100;
         public const int GRAVITY = 100;
 
-        private const float HIT_TIME = 3.0f;
+        private const float HIT_TIME = 1.8f;
 
         internal float HitTime { get; set; }
 

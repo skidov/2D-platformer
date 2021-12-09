@@ -15,6 +15,11 @@ namespace Platformer.Map
 {
     public class MapManager
     {
+        private const float GAME_OVER_TIME = 3.0f;
+
+        private bool gameOver;
+        private float gameOverTime;
+
         private GameScene gameScene;
         private Map map;
         private PlayerCharacterController playerController;
@@ -35,6 +40,9 @@ namespace Platformer.Map
             this.gameScene = gameScene;
             this.playerType = playerType;
             this.content = content;
+
+            gameOver = false;
+            gameOverTime = GAME_OVER_TIME;
 
             switch (mapType)
             {
@@ -141,6 +149,14 @@ namespace Platformer.Map
 
             if (CollisionBoxManager.IntersectWithGameEndBoxes(player.CharacterCollisionBox))
                 gameScene.PlayerWin();
+
+            if (gameOver)
+            {
+                if (gameOverTime > 0)
+                    gameOverTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                else gameScene.PlayerDied();
+            }
+
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -197,7 +213,8 @@ namespace Platformer.Map
         {
             if (player == character)
             {
-                gameScene.PlayerDied();
+                CollisionBoxManager.RemovePlayerCollisionBox(player.CharacterCollisionBox);
+                gameOver = true;
             } 
             else 
             {
