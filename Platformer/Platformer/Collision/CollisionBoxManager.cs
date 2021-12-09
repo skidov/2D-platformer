@@ -2,13 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Platformer.Characters;
+using Platformer.Components;
 using System.Collections.Generic;
 
 namespace Platformer.Collision
 {
     class CollisionBoxManager
     {
-        private static Texture2D _pointTexture;
         private static Dictionary<CollisionBox, PlayerCharacter> playerCharactersBoxes = new Dictionary<CollisionBox, PlayerCharacter>();
         private static Dictionary<CollisionBox, EnemyCharacter> enemyCharactersBoxes = new Dictionary<CollisionBox, EnemyCharacter>();
         private static List<CollisionBox> gameEndBoxes = new List<CollisionBox>();
@@ -122,26 +122,12 @@ namespace Platformer.Collision
 
         public static void DrawCollisionBox(SpriteBatch spriteBatch, CollisionBox collisionBox, Color color)
         {
-            DrawRectangle(spriteBatch, new Rectangle(
+            RectangleDrawer.DrawRectangle(spriteBatch, new Rectangle(
                 (int)(collisionBox.Center.X - collisionBox.HalfSize.X),
                 (int)(collisionBox.Center.Y - collisionBox.HalfSize.Y),
                 (int)collisionBox.HalfSize.X * 2,
                 (int)collisionBox.HalfSize.Y * 2),
                 color, 1);
-        }
-
-        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color, int lineWidth)
-        {
-            if (_pointTexture == null)
-            {
-                _pointTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-                _pointTexture.SetData<Color>(new Color[] { Color.White });
-            }
-
-            spriteBatch.Draw(_pointTexture, new Rectangle(rectangle.X, rectangle.Y, lineWidth, rectangle.Height + lineWidth), color);
-            spriteBatch.Draw(_pointTexture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width + lineWidth, lineWidth), color);
-            spriteBatch.Draw(_pointTexture, new Rectangle(rectangle.X + rectangle.Width, rectangle.Y, lineWidth, rectangle.Height + lineWidth), color);
-            spriteBatch.Draw(_pointTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + lineWidth, lineWidth), color);
         }
     }
 }

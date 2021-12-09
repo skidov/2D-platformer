@@ -11,9 +11,6 @@ namespace Platformer
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public static int ScreenWidth { get; private set; }
-        public static int ScreenHeight { get; private set; }
-
         Scene actualScene;
 
         public Game1()
@@ -23,17 +20,12 @@ namespace Platformer
             IsMouseVisible = true;
 
             _graphics.IsFullScreen = false;
-            _graphics.PreferredBackBufferWidth = ScreenWidth;
-            _graphics.PreferredBackBufferHeight = ScreenHeight;
-
             _graphics.ApplyChanges();
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            ScreenWidth = _graphics.PreferredBackBufferWidth;
-            ScreenHeight = _graphics.PreferredBackBufferHeight;
 
             base.Initialize();
         }
@@ -44,7 +36,7 @@ namespace Platformer
 
             // TODO: use this.Content to load your game content here
 
-            ChangeScene(new GameScene(this, Content, Maps.MapType.BASICMAP, Characters.PlayerChacterType.HUNTRESS));
+            ChangeScene(new MenuScene(this, Content));
         }
 
         protected override void Update(GameTime gameTime)
@@ -61,7 +53,7 @@ namespace Platformer
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(153, 153, 255));
 
             // TODO: Add your drawing code here
 
