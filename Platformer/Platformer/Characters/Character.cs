@@ -14,6 +14,10 @@ namespace Platformer.Characters
         public const int MAX_FALLING_SPEED = 100;
         public const int GRAVITY = 100;
 
+        private const float HIT_TIME = 3.0f;
+
+        internal float HitTime { get; set; }
+
         private MapManager MapManager { get; set; }
 
         private CharacterDirection direction;
@@ -64,9 +68,15 @@ namespace Platformer.Characters
         public Character(MapManager mapManager)
         {
             MapManager = mapManager;
+            HitTime = 0;
         }
 
-        public abstract void Update(GameTime gameTime);
+        public virtual void Update(GameTime gameTime)
+        {
+            if (HitTime > 0)
+                HitTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
+
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
         public void SetUpRunSeed(float walkSpeed)
@@ -147,15 +157,27 @@ namespace Platformer.Characters
 
         public void Hit(int damage)
         {
-            Health -= damage;
-            if (Health < 0)
-                Health = 0;
-            if (Health == 0)
-                MapManager.CharacterDied(this);
+            if (HitTime <= 0)
+            {
+                Health -= damage;
+                if (Health < 0)
+                    Health = 0;
+                if (Health == 0)
+                {
+                    MapManager.CharacterDied(this);
+                    ActionDeath();
+                }
+                HitTime = HIT_TIME;
+                ActionTakeHit();
+            }
         }
+
+        abstract public void ActionDeath();
 
         abstract public void ActionIdle();
 
         abstract public void ActionFall();
+
+        abstract public void ActionTakeHit();
     }
 }

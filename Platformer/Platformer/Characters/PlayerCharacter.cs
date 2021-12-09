@@ -9,13 +9,9 @@ namespace Platformer.Characters
     {
         public PlayerCharacter(MapManager mapManager) : base(mapManager) { }
 
-        abstract public void ActionDeath();
-
         abstract public void ActionJump();
 
         abstract public void ActionRun();
-
-        abstract public void ActionTakeHit();
 
         abstract public void ActionAttack1();
 

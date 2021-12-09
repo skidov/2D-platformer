@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Platformer.Collision;
 
 namespace Platformer.Characters
 {
@@ -24,10 +25,19 @@ namespace Platformer.Characters
                 Character.Direction = CharacterDirection.LEFT;
             else if (pos.X < minXPos)
                 Character.Direction = CharacterDirection.RIGHT;
+
+            bool playerInRange = CollisionBoxManager.IntersectWithPlayer(Character.GetAttackCollisionBox).Count > 0;
             switch (Character.State)
             {
                 case CharacterState.IDLE:
-                    Character.ActionRun();
+                    if (playerInRange)
+                        Character.ActionAttack();
+                    else
+                        Character.ActionRun();
+                    break;
+                case CharacterState.RUN:
+                    if (playerInRange)
+                        Character.ActionAttack();
                     break;
             }
             Character.Update(gameTime);

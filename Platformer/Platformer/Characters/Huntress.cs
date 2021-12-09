@@ -50,6 +50,8 @@ namespace Platformer.Characters
 
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+
             switch (State)
             {
                 case CharacterState.ATTACK:
@@ -73,6 +75,8 @@ namespace Platformer.Characters
                     SetUpRunSeed(WALK_SPEED);
                     break;
                 case CharacterState.TAKEHIT:
+                    if (Animation.IsEnded)
+                        ActionIdle();
                     break;
             }
 
@@ -133,14 +137,18 @@ namespace Platformer.Characters
 
         public override void ActionTakeHit()
         {
+            Speed = Vector2.Zero;
+
             Animation.NewSpriteSheet(spriteSheetTakeHit);
-            Animation.AnimationTime = 0.15;
-            Animation.Repeat = true;
+            Animation.AnimationTime = 0.25;
+            Animation.Repeat = false;
             State = CharacterState.TAKEHIT;
         }
 
         public override void ActionAttack1()
         {
+            Speed = Vector2.Zero;
+
             Animation.NewSpriteSheet(spriteSheetAttack1);
             Animation.AnimationTime = 0.12;
             Animation.Repeat = false;
@@ -149,6 +157,8 @@ namespace Platformer.Characters
 
         public override void ActionAttack2()
         {
+            Speed = Vector2.Zero;
+
             Animation.NewSpriteSheet(spriteSheetAttack2);
             Animation.AnimationTime = 0.22;
             Animation.Repeat = false;
