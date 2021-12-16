@@ -42,12 +42,12 @@ namespace Platformer.Scenes
 
         public void PlayerDied()
         {
-            _Game.ChangeScene(new GameOverScene(_Game, Content, false));
+            _Game.ChangeScene(new GameOverScene(_Game, Content, false, mapManager.PlayerCoins));
         }
 
         public void PlayerWin()
         {
-            _Game.ChangeScene(new GameOverScene(_Game, Content, true));
+            _Game.ChangeScene(new GameOverScene(_Game, Content, true, mapManager.PlayerCoins));
         }
     }
 }

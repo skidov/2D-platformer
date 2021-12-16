@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using Platformer.Characters;
+using Platformer.Items;
 using Platformer.Traps;
 using System.Collections.Generic;
 
@@ -23,9 +24,9 @@ namespace Platformer.Map
             _TiledMapRenderer = new TiledMapRenderer(graphicsDevice, _TiledMap);
             Scale = SCALE;
 
-            Huntress.LoadContent(content);
             Skeleton.LoadContent(content);
             SpikesTrap.LoadContent(content);
+            Coin.LoadContent(content);
         }
     }
 }

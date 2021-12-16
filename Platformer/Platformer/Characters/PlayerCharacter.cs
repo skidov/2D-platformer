@@ -8,6 +8,8 @@ namespace Platformer.Characters
 {
     public abstract class PlayerCharacter : Character
     {
+        public int Coins { get; set; }
+
         internal Vector2 Attack1CollisionBoxOffSet;
         internal Vector2 Attack1CollisionBoxHalfSize;
         internal float Attack1CollisionBoxRightOffSet;

@@ -6,6 +6,7 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.ViewportAdapters;
 using Platformer.Characters;
 using Platformer.Collision;
+using Platformer.Items;
 using Platformer.Maps;
 using Platformer.Scenes;
 using Platformer.Traps;
@@ -28,15 +29,21 @@ namespace Platformer.Map
         private List<EnemyCharacterController> enemyControllers;
         private List<EnemyCharacter> diedEnemy;
         private List<Trap> traps;
+        private List<Item> items;
+        private List<Item> removableItems;
         private OrthographicCamera _camera;
         private SpriteFont font;
         private ContentManager content;
+
+        public int PlayerCoins { get { return player.Coins; } }
 
         public MapManager(GameScene gameScene, MapType mapType, PlayerChacterType playerType, Game game, ContentManager content)
         {
             enemyControllers = new List<EnemyCharacterController>();
             diedEnemy = new List<EnemyCharacter>();
             traps = new List<Trap>();
+            items = new List<Item>();
+            removableItems = new List<Item>();
             this.gameScene = gameScene;
             this.playerType = playerType;
             this.content = content;
@@ -62,6 +69,8 @@ namespace Platformer.Map
 
         internal void LoadObjects()
         {
+            Huntress.LoadContent(content);
+
             CollisionBoxManager.Reset();
 
             float scale = map.Scale;
@@ -120,6 +129,17 @@ namespace Platformer.Map
                         }
                     }
                 }
+                else if (e.Name == "Items")
+                {
+                    foreach (var o in e.Objects)
+                    {
+                        if (o.Name == "Coin")
+                        {
+                            Coin item = new Coin(this, o.Position * scale, int.Parse(o.Properties["Value"]));
+                            items.Add(item);
+                        }
+                    }
+                }
             }
 
             font = content.Load<SpriteFont>("Fonts/Font");
@@ -144,6 +164,13 @@ namespace Platformer.Map
 
             foreach (var e in traps)
                 e.Update(gameTime);
+
+            foreach (var e in items)
+                e.Update(gameTime);
+
+            foreach (var e in removableItems)
+                items.Remove(e);
+            removableItems.Clear();
 
             map._TiledMapRenderer.Update(gameTime);
 
@@ -180,12 +207,16 @@ namespace Platformer.Map
             foreach (var e in traps)
                 e.Draw(gameTime, spriteBatch);
 
+            foreach (var e in items)
+                e.Draw(gameTime, spriteBatch);
+
             //CollisionBoxManager.Draw(spriteBatch);
 
             spriteBatch.End();
 
             spriteBatch.Begin();
             spriteBatch.DrawString(font, "Character Health: " + player.Health.ToString(), new Vector2(10, 10), Color.Black);
+            spriteBatch.DrawString(font, "Coins: " + player.Coins.ToString(), new Vector2(10, 40), Color.Black);
             spriteBatch.End();
         }
 
@@ -222,6 +253,11 @@ namespace Platformer.Map
                 enemyControllers.RemoveAll(x => x.Character == character);
                 diedEnemy.Add((EnemyCharacter)character);
             }
+        }
+
+        public void DeleteItem(Item item)
+        {
+            removableItems.Add(item);
         }
     }
 }

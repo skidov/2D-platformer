@@ -12,11 +12,13 @@ namespace Platformer.Scenes
     {
         private SpriteFont font;
         bool win;
+        int coins;
         Button buttonBack;
 
-        public GameOverScene(Game1 game, ContentManager content, bool win) : base(game, content)
+        public GameOverScene(Game1 game, ContentManager content, bool win, int coins) : base(game, content)
         {
             this.win = win;
+            this.coins = coins;
 
             game.IsMouseVisible = true;
         }
@@ -26,7 +28,7 @@ namespace Platformer.Scenes
             font = Content.Load<SpriteFont>("Fonts/FontBig");
 
             float sizex = 230, sizey = 50;
-            Vector2 pos = new Vector2(_Game.GraphicsDevice.Viewport.Width / 2 - sizex / 2, _Game.GraphicsDevice.Viewport.Height / 2);
+            Vector2 pos = new Vector2(_Game.GraphicsDevice.Viewport.Width / 2 - sizex / 2, _Game.GraphicsDevice.Viewport.Height / 2 + 30);
             buttonBack = new Button(font, "Bact to menu", pos, new Vector2(sizex, sizey), new Color(153, 153, 153), new Color(128, 128, 128));
             buttonBack.Click += ButtonBack_Click;
         }
@@ -45,10 +47,11 @@ namespace Platformer.Scenes
                 text = "Game Over! You Died!";
 
             float x = _Game.GraphicsDevice.Viewport.Width / 2 - font.MeasureString(text).X / 2;
-            float y = _Game.GraphicsDevice.Viewport.Height / 2 - font.MeasureString(text).Y / 2 - 25;
+            float y = _Game.GraphicsDevice.Viewport.Height / 2 - font.MeasureString(text).Y / 2 - 30;
 
             spriteBatch.Begin();
             spriteBatch.DrawString(font, text, new Vector2(x, y), Color.Black);
+            spriteBatch.DrawString(font, "Coins: " + coins, new Vector2(x, y + 35), Color.Black);
             buttonBack.Draw(spriteBatch, gameTime);
             spriteBatch.End();
         }

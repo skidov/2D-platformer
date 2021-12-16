@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="49">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="54">
  <editorsettings>
   <export target="basicmap.lua" format="lua"/>
  </editorsettings>
@@ -18,6 +18,23 @@
  </objectgroup>
  <objectgroup id="8" name="Traps">
   <object id="45" name="SpikesTrap" x="224" y="256"/>
+ </objectgroup>
+ <objectgroup id="9" name="Items">
+  <object id="49" name="Coin" x="240" y="213">
+   <properties>
+    <property name="Value" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="50" name="Coin" x="272" y="213">
+   <properties>
+    <property name="Value" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="53" name="Coin" x="304" y="213">
+   <properties>
+    <property name="Value" type="int" value="5"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="5" name="Collisions">
   <object id="33" x="0" y="0" width="16" height="256"/>
