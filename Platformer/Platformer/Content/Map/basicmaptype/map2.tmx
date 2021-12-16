@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="54">
+ <editorsettings>
+  <export target="map2.lua" format="lua"/>
+ </editorsettings>
+ <tileset firstgid="1" source="Assets.tsx"/>
+ <layer id="1" name="Map" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt00sKwkAQhOFZeAuTW4jkIjGinsHHKQI5teXKIUsx8zdUF3yQZao6GYp3BvoF4GR/72R/72R/72R/72R/72T/33KR68rtXy+1YUY5ySTn4nf/uzzkKa/i13+unpfi13+d7N82e9kF0rr/QfpAWvSvb97JMZAW/aPdvPbZYOt/LNrN0xf9/dHo/Wn0/jR6fxq9P43en0bvT6P3p70B9lWFRw==
+  </data>
+ </layer>
+ <objectgroup id="6" name="GameObjects">
+  <object id="29" name="StartPoint" x="32" y="256"/>
+  <object id="30" name="EndPoint" x="968" y="208" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup id="7" name="PatrolEnemy">
+  <object id="31" name="Skeleton" x="560" y="255" width="160"/>
+ </objectgroup>
+ <objectgroup id="8" name="Traps">
+  <object id="45" name="SpikesTrap" x="224" y="256"/>
+ </objectgroup>
+ <objectgroup id="9" name="Items">
+  <object id="49" name="Coin" x="240" y="213">
+   <properties>
+    <property name="Value" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="50" name="Coin" x="272" y="213">
+   <properties>
+    <property name="Value" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="53" name="Coin" x="304" y="213">
+   <properties>
+    <property name="Value" type="int" value="5"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Collisions">
+  <object id="33" x="0" y="0" width="16" height="256"/>
+  <object id="34" x="0" y="256" width="320" height="256"/>
+  <object id="35" x="320" y="352" width="80" height="160"/>
+  <object id="36" x="400" y="320" width="48" height="192"/>
+  <object id="37" x="448" y="288" width="48" height="224"/>
+  <object id="38" x="496" y="256" width="528" height="256"/>
+  <object id="43" x="224" y="213" width="96" height="6"/>
+ </objectgroup>
+</map>

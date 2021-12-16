@@ -6,6 +6,7 @@ namespace Platformer.Maps
 {
     public enum MapType
     {
-        BASICMAP
+        BASICMAP,
+        MAP2
     }
 }

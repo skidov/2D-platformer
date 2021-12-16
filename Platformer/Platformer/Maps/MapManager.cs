@@ -56,6 +56,9 @@ namespace Platformer.Map
                 case MapType.BASICMAP:
                     this.map = new BasicMap(content, game.GraphicsDevice);
                     break;
+                case MapType.MAP2:
+                    this.map = new Map2(content, game.GraphicsDevice);
+                    break;
                 default:
                     this.map = new BasicMap(content, game.GraphicsDevice);
                     break;

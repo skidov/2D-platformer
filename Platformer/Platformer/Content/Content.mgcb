@@ -270,17 +270,22 @@
 /processorParam:TextureFormat=Color
 /build:Items/MonedaR.png
 
-#begin Map/basicmap/Assets.tsx
+#begin Map/basicmaptype/Assets.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
-/build:Map/basicmap/Assets.tsx
+/build:Map/basicmaptype/Assets.tsx
 
-#begin Map/basicmap/basicmap.tmx
+#begin Map/basicmaptype/basicmap.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:Map/basicmap/basicmap.tmx
+/build:Map/basicmaptype/basicmap.tmx
 
-#begin Map/basicmap/tiles/Assets.png
+#begin Map/basicmaptype/map2.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Map/basicmaptype/map2.tmx
+
+#begin Map/basicmaptype/tiles/Assets.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -290,9 +295,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Map/basicmap/tiles/Assets.png
+/build:Map/basicmaptype/tiles/Assets.png
 
-#begin Map/basicmap/tiles/Background_1.png
+#begin Map/basicmaptype/tiles/Background_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -302,9 +307,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Map/basicmap/tiles/Background_1.png
+/build:Map/basicmaptype/tiles/Background_1.png
 
-#begin Map/basicmap/tiles/Background_2.png
+#begin Map/basicmaptype/tiles/Background_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -314,7 +319,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Map/basicmap/tiles/Background_2.png
+/build:Map/basicmaptype/tiles/Background_2.png
 
 #begin Traps/16x16 traps.png
 /importer:TextureImporter

@@ -11,16 +11,16 @@ using System.Collections.Generic;
 
 namespace Platformer.Map
 {
-    public class BasicMap : Map
+    public class Map2 : Map
     {
         private const float SCALE = 1.8f;
 
-        public BasicMap(ContentManager content, GraphicsDevice graphicsDevice)
+        public Map2(ContentManager content, GraphicsDevice graphicsDevice)
         {
             BackGround = new List<Texture2D>();
             BackGround.Add(content.Load<Texture2D>("Map/basicmaptype/tiles/Background_2"));
             BackGround.Add(content.Load<Texture2D>("Map/basicmaptype/tiles/Background_1"));
-            _TiledMap = content.Load<TiledMap>("Map/basicmaptype/basicmap");
+            _TiledMap = content.Load<TiledMap>("Map/basicmaptype/map2");
             _TiledMapRenderer = new TiledMapRenderer(graphicsDevice, _TiledMap);
             Scale = SCALE;
 
