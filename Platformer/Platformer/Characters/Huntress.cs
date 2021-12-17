@@ -15,7 +15,7 @@ namespace Platformer.Characters
         private const int COLLISION_BOX_HALF_SIZE_X = 11;
         private const int COLLISION_BOX_HALF_SIZE_Y = 23;
         private const float WALK_SPEED = 100.0f;
-        private const float JUMP_SPEED = 130.0f;
+        private const float JUMP_SPEED = 140.0f;
 
         private const int ATTACK_COLLISION_BOX_OFF_SET_X = 62;
         private const int ATTACK_COLLISION_BOX_OFF_SET_Y = 102;

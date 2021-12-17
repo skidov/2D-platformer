@@ -1,48 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="54">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="72">
  <editorsettings>
   <export target="map2.lua" format="lua"/>
  </editorsettings>
  <tileset firstgid="1" source="Assets.tsx"/>
  <layer id="1" name="Map" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt00sKwkAQhOFZeAuTW4jkIjGinsHHKQI5teXKIUsx8zdUF3yQZao6GYp3BvoF4GR/72R/72R/72R/72R/72T/33KR68rtXy+1YUY5ySTn4nf/uzzkKa/i13+unpfi13+d7N82e9kF0rr/QfpAWvSvb97JMZAW/aPdvPbZYOt/LNrN0xf9/dHo/Wn0/jR6fxq9P43en0bvT6P3p70B9lWFRw==
+   eJztk0kKwkAURDvgWtStw9ZpK5Kt3sEB9QwOpxA8jbOX0DtZYsSmMTFKkvqkU/Cg4ae7U7/6u8puuewfICvzb7ds8D8AQzACY6Nmg/85WIAlWBk1G/yvtfXGqKXZ/9ZRagf24ACO4ATO4OI8v0mzf10v/6bi8j8BU4NZTHeFufsK77cE/UtT0vnHqX/elqT8GbORpvz9FNRXSfmHUdRvxIb8gyQx/7AZF0Hpx7PNPZLzr4MGaPrUW6DtrXugH2Kvvqeg5ORfBjlBJO2/A6qCiML/t/nUM6+AriAe/s2ZynvoCppRfdbUh/OkZa5TU/HPmLTMM96w3x8bdv/ZsPvPht1/Nuz+s2H3nw27/2zY/WdzB161qtw=
   </data>
  </layer>
  <objectgroup id="6" name="GameObjects">
-  <object id="29" name="StartPoint" x="32" y="256"/>
-  <object id="30" name="EndPoint" x="968" y="208" width="48" height="48"/>
+  <object id="29" name="StartPoint" x="32" y="352"/>
+  <object id="30" name="EndPoint" x="920" y="64" width="48" height="48"/>
  </objectgroup>
  <objectgroup id="7" name="PatrolEnemy">
-  <object id="31" name="Skeleton" x="560" y="255" width="160"/>
+  <object id="31" name="Skeleton" x="160" y="352" width="200"/>
+  <object id="71" name="Skeleton" x="630" y="229" width="50"/>
  </objectgroup>
  <objectgroup id="8" name="Traps">
-  <object id="45" name="SpikesTrap" x="224" y="256"/>
+  <object id="45" name="SpikesTrap" x="511" y="197"/>
+  <object id="65" name="SpikesTrap" x="760" y="181"/>
+  <object id="66" name="SpikesTrap" x="856" y="213"/>
  </objectgroup>
  <objectgroup id="9" name="Items">
-  <object id="49" name="Coin" x="240" y="213">
+  <object id="49" name="Coin" x="427" y="320">
    <properties>
     <property name="Value" type="int" value="1"/>
    </properties>
   </object>
-  <object id="50" name="Coin" x="272" y="213">
+  <object id="50" name="Coin" x="400" y="149">
    <properties>
     <property name="Value" type="int" value="3"/>
    </properties>
   </object>
-  <object id="53" name="Coin" x="304" y="213">
+  <object id="53" name="Coin" x="368" y="149">
    <properties>
     <property name="Value" type="int" value="5"/>
    </properties>
   </object>
+  <object id="68" name="Coin" x="902" y="213">
+   <properties>
+    <property name="Value" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="69" name="Coin" x="914" y="149">
+   <properties>
+    <property name="Value" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="70" name="Coin" x="879" y="213">
+   <properties>
+    <property name="Value" type="int" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="5" name="Collisions">
-  <object id="33" x="0" y="0" width="16" height="256"/>
-  <object id="34" x="0" y="256" width="320" height="256"/>
-  <object id="35" x="320" y="352" width="80" height="160"/>
+  <object id="33" x="0" y="0" width="16" height="352"/>
+  <object id="34" x="0" y="352" width="400" height="160"/>
   <object id="36" x="400" y="320" width="48" height="192"/>
-  <object id="37" x="448" y="288" width="48" height="224"/>
-  <object id="38" x="496" y="256" width="528" height="256"/>
-  <object id="43" x="224" y="213" width="96" height="6"/>
+  <object id="37" x="448" y="288" width="577" height="224"/>
+  <object id="57" x="464" y="197" width="96" height="6"/>
+  <object id="58" x="496" y="261" width="96" height="6"/>
+  <object id="59" x="608" y="229" width="96" height="6"/>
+  <object id="60" x="720" y="181" width="96" height="6"/>
+  <object id="61" x="816" y="213" width="96" height="6"/>
+  <object id="62" x="848" y="149" width="80" height="6"/>
+  <object id="63" x="928" y="123" width="32" height="165"/>
+  <object id="64" x="880" y="112" width="128" height="11"/>
+  <object id="67" x="352" y="149" width="96" height="6"/>
  </objectgroup>
 </map>

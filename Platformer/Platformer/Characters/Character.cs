@@ -12,7 +12,7 @@ namespace Platformer.Characters
     public abstract class Character
     {
         public const int MAX_FALLING_SPEED = 100;
-        public const int GRAVITY = 100;
+        public const int GRAVITY = 105;
 
         private const float HIT_TIME = 1.8f;
 
